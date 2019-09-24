@@ -11,6 +11,18 @@
 |
 */
 
+use App\Http\Controllers\ManagerController;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
-    return view('index');
+    return view('admin');
 });
+Route::resource('/manager','ManagerController');
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+

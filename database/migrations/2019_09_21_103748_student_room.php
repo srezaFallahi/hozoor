@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManagerTable extends Migration
+class StudentRoom extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateManagerTable extends Migration
      */
     public function up()
     {
-        Schema::create('manager', function (Blueprint $table) {
+        Schema::create('room_student', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('room_id')->unsigned();
+            $table->string('student_id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateManagerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manager');
+        Schema::dropIfExists('room_student');
     }
 }
