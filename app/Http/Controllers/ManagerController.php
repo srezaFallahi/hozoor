@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TeacherRequest;
 use App\Teacher;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::all();
-        $num = 1;
-        return view('manager-admin.index', compact('teachers', 'num'));
+
     }
 
     /**
@@ -36,9 +35,9 @@ class ManagerController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TeacherRequest $request)
     {
-        //
+
     }
 
     /**

@@ -496,6 +496,7 @@
     border-right: 2px solid rgba(255, 255, 255, 0.5);
 }
 
+
 /* Button 3c */
 .btn-3c {
     padding: 80px 20px 20px 20px;
@@ -1403,28 +1404,9 @@
 
 /* Success and error */
 
-.btn-success,
-.btn-error {
-    color: transparent;
-}
 
-.btn-success:after,
-.btn-error:after {
-    z-index: 1;
-    color: #fff;
-    left: 40%;
-}
 
-.btn-success:before {
-    content: "\e001";
-}
 
-.btn-success:after {
-    content: "Success!";
-    -webkit-animation: moveUp 0.5s;
-    -moz-animation: moveUp 0.5s;
-    animation: moveUp 0.5s;
-}
 
 @-webkit-keyframes moveUp {
     0% {

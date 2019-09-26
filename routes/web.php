@@ -15,10 +15,11 @@ use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('admin');
+    return view('manager-admin.index');
 });
-Route::resource('/manager','ManagerController');
-
+Route::resource('/manager', 'ManagerController');
+Route::resource('/teacher', 'TeacherController');
+Route::resource('/student', 'StudentController');
 
 
 Auth::routes();

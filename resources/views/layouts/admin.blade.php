@@ -9,12 +9,24 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
 
-{{--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">--}}
-{{--    <link rel="stylesheet" href="https://cdnjs.com/libraries/bttn.css">--}}
-<!-- Fonts -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link href='https://cdn.fontcdn.ir/Font/Persian/Sahel/Sahel.css' rel='stylesheet' type='text/css'>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/css/mdb.min.css" rel="stylesheet">
 
+    <!--sidebar-->
+    <link href="{{asset('fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{{asset('css/admin.css')}}" rel="stylesheet">
     <!-- Icons -->
 
 
@@ -29,6 +41,7 @@
     <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/date-picker.css')}}" rel="stylesheet">
 
 
     <style>
@@ -44,60 +57,143 @@
     </style>
 </head>
 <body class="grey lighten-3">
+<div id="wrapper" dir="rtl">
 
-<!--Main Navigation-->
-<header dir="rtl">
+    <!--Main Navigation-->
+    <header>
 
-    <!-- Navbar -->
-    <!-- Sidebar -->
-    <div class="sidebar-fixed position-fixed text-center  ">
+        <!-- Navbar -->
+        <!-- Sidebar -->
 
-        <a class="logo-wrapper animated bounce infinite waves-effect">
-            <strong style="font-family: Sahel;font-weight: bold;font-size: 150%" class="text-dark">پنل مدیریت</strong>
-        </a>
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion flex-wrap-reverse"
+            id="accordionSidebar">
 
-        <div class="list-group list-group-flush text-right ">
-            <a href="#" class="list-group-item active waves-effect">
-                <i class="fas fa-chart-pie mr-3"></i> Dashboard
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin2.blade.php">
+                <div class="sidebar-brand-icon rotate-n-15 ">
+                    <i class="fas fa-laugh-wink animated bounce infinite"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">پنل مدیریت</div>
             </a>
-            <a href="#" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-user mr-3"></i> Profile</a>
-            <a href="#" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-table mr-3"></i> Tables</a>
-            <a href="#" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-map mr-3"></i> Maps</a>
-            <a href="#" class="list-group-item list-group-item-action waves-effect">
-                <i class="fas fa-money-bill-alt mr-3"></i> Orders</a>
-        </div>
 
-    </div>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-    <!-- Sidebar -->
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link text-right" href="admin2.blade.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span style="font-family: Sahel;font-weight: bold;font-size: 18px">داشبورد</span></a>
+            </li>
 
-</header>
-<!--Main Navigation-->
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-<!--Main layout-->
-<main class="pt-5 mx-lg-5 col-sm-9">
-    <div class="container-fluid mt-5">
-
-        <!-- Heading -->
-        <div class="card mb-4 wow fadeIn">
-
-            <!--Card content-->
-            <div class="card-body justify-content-between">
-
-                <h4 class="mb-2 mb-sm-0 pt-1">
-                    @yield('header')
-                </h4>
-
+            <!-- Heading -->
+            <div class="sidebar-heading text-right">
+                مدیریت
             </div>
 
-        </div>
-        <!-- Heading -->
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed text-right" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span style="font-family: Sahel;font-weight: bold;font-size: 15px">معلمین</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        {{--                            <h6 class="collapse-header">:</h6>--}}
+                        <a class="collapse-item text-right" href="{{route('teacher.create')}}"
+                           style="font-family: Sahel;font-weight: bolder;font-size: 15px"><i
+                                class="fas fa-user-plus"></i> اضافه کردن</a>
+                        <a class="collapse-item text-right" href="{{route('teacher.show',1)}}"
+                           style="font-family: Sahel;font-weight: bolder;font-size: 15px"><i
+                                class="fas fa-users"></i> نمایش معلمین</a>
+                    </div>
+                </div>
+            </li>
 
-        <!--Grid row-->
-        <div class="row wow fadeIn">
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link  text-right collapsed" href="#" data-toggle="collapse"
+                   data-target="#collapseUtilities"
+                   aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-user-graduate"></i> <span>دانش آموزان</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+                        <a class="collapse-item text-right" href="utilities-border.html"><i class="fas fa-user-plus"></i> اضافه کردن  </a>
+                        <a class="collapse-item text-right" href="utilities-color.html"> <i class="fas fa-users"></i>
+                            نمایش دانش آموزان</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed text-right" href="#" data-toggle="collapse"
+                   data-target="#collapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Pages</span>
+                </a>
+                <div id="collapsePages" class="collapse text-right" aria-labelledby="headingPages"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item ">
+                <a class="nav-link text-right " href="charts.html">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Charts</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link text-right" href="tables.html">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Tables</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+
+        <!-- Sidebar -->
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main class="pt-5 mx-lg-5 col-sm-9">
+        <div class="row wow fadeInUp">
 
             <!--Grid column-->
             <div class="col-md-12 mb-4">
@@ -111,17 +207,18 @@
         </div>
         <!--Grid column-->
 
-    </div>
-    <!--Grid row-->
+        <!--Grid row-->
 
-    <!--Grid row-->
-    <!--Grid row-->
+        <!--Grid row-->
+        <!--Grid row-->
 
-    <!--Grid row-->
+        <!--Grid row-->
 
 
-</main>
-</body>
+    </main>
+</div>
+
+
 <!--Main layout-->
 
 <!--Footer-->
@@ -133,14 +230,35 @@
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="{{asset('js/popper.min.js')}}"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+{{--    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>--}}
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="{{asset('js/classie.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/modernizr.custom.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/inter-phone.js')}}"></script>
+<!-- JQuery -->
+{{--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
+<!-- Bootstrap tooltips -->
+{{--    <script type="text/javascript"--}}
+{{--            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>--}}
+{{--    <!-- Bootstrap core JavaScript -->--}}
+{{--    <script type="text/javascript"--}}
+{{--            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>--}}
+{{--    <!-- MDB core JavaScript -->--}}
+{{--    <script type="text/javascript"--}}
+{{--            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>--}}
 <!-- Initializations -->
 <!-- Core -->
+<script src="{{asset('jquery/jquery.min.js')}}"></script>
+<script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{{asset('jquery-easing/jquery.easing.js')}}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('js/persian-date.js')}}"></script>
+<script src="{{asset('js/persian-datepicker.js')}}"></script>
 
 <!-- Theme JS -->
 <script type="text/javascript">
@@ -148,9 +266,20 @@
     new WOW().init();
 
 </script>
+<script>
+    type = "text/javascript" >
+        $(document).ready(function () {
+            $(".date").pDatepicker();
+        });
+    $('.observer-example').persianDatepicker({
+        observer: true,
+        format: 'YYYY/MM/DD',
+        altField: '.observer-example-alt'
+    });
+</script>
 
 <!-- Charts -->
 
-</body>
 
-</html>
+</body>
+< /html>

@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grade extends Model
 {
+    protected $fillable = [
 
-    public function student(){
+        'name'
+    ];
+
+    public function student()
+    {
         return $this->hasOne('App\Student');
     }
 }
