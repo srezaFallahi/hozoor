@@ -2,11 +2,11 @@
 
 @section('content')
     <!-- Extended material form grid -->
-    <div class="card-header card-header-tabs  warning-color wow fadeInLeft">
+    <div class="card-header card-header-tabs  cyan darken-3 wow fadeInLeft">
 
         <div class="card-title text-right text-white">
-            <span style="font-family: Sahel;font-size: 20px; font-weight: normal"> ویرایش اطلاعات معلم  <i
-                    class="fas fa-user-plus"></i> </span>
+            <span style="font-family: Sahel;font-size: 20px; font-weight: normal"> <i
+                    class="fas fa-user-plus"></i> اضافه کردن  معلم   </span>
 
             <div class="clearfix d-md-none"></div>
 
@@ -121,7 +121,7 @@
             {{--                   value="انصراف">--}}
             <input type="submit" class=" btn btn-6 btn-6f"
                    style="font-family: Sahel;font-weight: bolder; color: white"
-                   value="ویرایش">
+                   value="ثبت">
         </form>
 
     </div>

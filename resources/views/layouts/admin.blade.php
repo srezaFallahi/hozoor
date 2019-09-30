@@ -95,14 +95,14 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item float-left">
                 <a class="nav-link collapsed text-right" href="#" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-chalkboard-teacher"></i>
                     <span style="font-family: Sahel;font-weight: bold;font-size: 15px">معلمین</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2  collapse-inner rounded">
                         {{--                            <h6 class="collapse-header">:</h6>--}}
                         <a class="collapse-item text-right" href="{{route('teacher.create')}}"
                            style="font-family: Sahel;font-weight: bolder;font-size: 15px"><i
@@ -116,20 +116,32 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link  text-right collapsed" href="#" data-toggle="collapse"
+                <a class="nav-link  text-right collapsed" href="" data-toggle="collapse"
                    data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-user-graduate"></i> <span>دانش آموزان</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                <div id="collapseUtilities" class="collapse" aria-expanded="false" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item text-right" href="utilities-border.html"><i class="fas fa-user-plus"></i> اضافه کردن  </a>
-                        <a class="collapse-item text-right" href="utilities-color.html"> <i class="fas fa-users"></i>
+                        <a class="collapse-item text-right" href="{{route('student.create')}}"><i
+                                class="fas fa-user-plus"></i> اضافه کردن </a>
+                        <a class="collapse-item text-right" href="{{route('student.show',1)}}"> <i
+                                class="fas fa-users"></i>
                             نمایش دانش آموزان</a>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-right" href="{{route('grade.show',1)}}">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span style="font-family: Sahel;font-weight: bold;">مقطع</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-right" href="{{route('class.show',1)}}">
+                    <i class="fas fa-chalkboard"></i> <span
+                        style="font-family: Sahel;font-weight: bold;">کلاس</span></a>
             </li>
 
             <!-- Divider -->
@@ -137,7 +149,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Addons
+                grdae
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -203,9 +215,10 @@
 
             </div>
 
-
         </div>
-        <!--Grid column-->
+    @yield('out-card')
+
+    <!--Grid column-->
 
         <!--Grid row-->
 
@@ -259,7 +272,7 @@
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
 <script src="{{asset('js/persian-date.js')}}"></script>
 <script src="{{asset('js/persian-datepicker.js')}}"></script>
-
+@yield('script')
 <!-- Theme JS -->
 <script type="text/javascript">
     // Animations initialization
@@ -279,7 +292,6 @@
 </script>
 
 <!-- Charts -->
-
-
 </body>
-< /html>
+</html>
+

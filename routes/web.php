@@ -15,12 +15,21 @@ use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('manager-admin.index');
+    return view('layouts.index');
 });
+
 Route::resource('/manager', 'ManagerController');
+Route::get('/admin', function () {
+    return view('layouts.admin');
+});
 Route::resource('/teacher', 'TeacherController');
 Route::resource('/student', 'StudentController');
-
+Route::resource('/grade', 'GradeController');
+Route::resource('/class', 'RoomController');
+Route::post('/class/add', 'RoomController@addStudent')->name('add-student');
+Route::post('/class/showStudent', 'RoomController@showClassStudent')->name('show-student');
+Route::post('/class/grade-class', 'RoomController@gradeClass')->name('grade-class');
+Route::post('/class/teacher-class', 'RoomController@teacherClass')->name('teacher-class');
 
 Auth::routes();
 

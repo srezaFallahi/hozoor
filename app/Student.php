@@ -13,7 +13,8 @@ class Student extends Model
         'dad_name',
         'personal_code',
         'birth_day',
-        'entry_date'
+        'entry_date',
+        'manager_id',
     ];
 
     public function rooms()
@@ -24,5 +25,10 @@ class Student extends Model
     public function grade()
     {
         return $this->belongsTo('App\Grade');
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo('App\Manager');
     }
 }

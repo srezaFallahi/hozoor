@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TeacherRequest;
-use App\Teacher;
+use App\Grade;
+use App\Http\Requests\GradeRequest;
+use App\Manager;
+use App\Room;
 use Illuminate\Http\Request;
 
-class ManagerController extends Controller
+class GradeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param $manager_id
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -26,6 +27,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -34,9 +36,12 @@ class ManagerController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TeacherRequest $request)
+    public function store(GradeRequest $request)
     {
-
+        $data = $request->all();
+        $manager = Manager::find(1);
+        $manager->grade()->create($data);
+        return redirect('/grade/show');
     }
 
     /**
@@ -47,7 +52,9 @@ class ManagerController extends Controller
      */
     public function show($id)
     {
-        //
+        $grades = Grade::all()->where('manager_id', '=', 1);
+        $num = 1;
+        return view('grade.index', compact('grades', 'num'));
     }
 
     /**
@@ -68,9 +75,12 @@ class ManagerController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GradeRequest $request, $id)
     {
-        //
+        $grade = Grade::find($id);
+        $grade->update($request->all());
+        return redirect('/grade/show');
+
     }
 
     /**
@@ -81,6 +91,24 @@ class ManagerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $grade = Grade::find($id);
+        $grade->delete();
+        return redirect('/grade/show');
+
+    }
+
+    public function gradeClass(Request $request)
+    {
+        $id = $request->id;
+        $grades = Grade::find($id);
+        $class = $grades->room()->get();
+        $manager = Manager::find(1);
+        $grades = $manager->grade()->get();
+        $teachers = $manager->teacher()->get();
+        $students = $manager->student()->get();
+        $num = 1;
+        return view('class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
+        $num = 1;
+        return view('class.index', compact('grades', 'num'));
     }
 }

@@ -26,7 +26,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('manager-admin.add-teacher');
+        return view('teacher-admin.add-teacher');
     }
 
     /**
@@ -55,7 +55,7 @@ class TeacherController extends Controller
         $teachers = Teacher::all()->where('manager_id', '=', $id);
         $num = 1;
 
-        return view('manager-admin.index', compact('teachers', 'num', 'id'));
+        return view('teacher-admin.index', compact('teachers', 'num', 'id'));
     }
 
     /**
@@ -67,7 +67,7 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $teacher = Teacher::find($id);
-        return view('manager-admin.edit', compact('teacher'));
+        return view('teacher-admin.edit', compact('teacher'));
     }
 
     /**

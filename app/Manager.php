@@ -15,7 +15,23 @@ class Manager extends Model
         'password'
     ];
 
-    public function teacher(){
+    public function teacher()
+    {
         return $this->hasOne('App\Teacher');
+    }
+
+    public function grade()
+    {
+        return $this->hasOne('App\Grade');
+    }
+
+    public function room()
+    {
+        return $this->hasOne('App\Room');
+    }
+
+    public function student()
+    {
+        return $this->hasOne('App\Student');
     }
 }

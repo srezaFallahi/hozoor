@@ -26,8 +26,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $grades = Grade::all();
-        return view('teacher-admin.add-student', compact('grades'));
+        $grades = Grade::all()->where('manager_id', '=', 1);
+        return view('student.add', compact('grades'));
     }
 
     /**
@@ -39,11 +39,10 @@ class StudentController extends Controller
     public function store(StudentRequest $request)
     {
         $data = $request->all();
-        $date=$request['birth_day'];
-//        $data.date
-        Student::create($data);
-        return redirect('/teacher/show',1);
+        $data['manager_id'] = 1;
 
+        Student::create($data);
+        return redirect('/student/show');
     }
 
     /**
@@ -56,7 +55,7 @@ class StudentController extends Controller
     {
         $students = Student::all();
         $num = 1;
-        return view('teacher-admin.index', compact('students', 'num'));
+        return view('student.index', compact('students', 'num'));
 
     }
 
@@ -68,7 +67,10 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $student = Student::find($id);
+        $grades = Grade::all()->where('manager_id', '=', 1);
+
+        return view('student.edit', compact('student', 'grades'));
     }
 
     /**
@@ -78,9 +80,11 @@ class StudentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, $id)
     {
-        //
+        $student = Student::find($id);
+        $student->update($request->all());
+        return redirect('/student/show');
     }
 
     /**
@@ -91,6 +95,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $student = Student::find($id);
+        $student->delete();
+        return redirect()->back();
     }
 }
