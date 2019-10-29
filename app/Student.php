@@ -31,4 +31,15 @@ class Student extends Model
     {
         return $this->belongsTo('App\Manager');
     }
+
+    public function users()
+    {
+        return $this->morphToMany('App\User', 'userable');
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany('App\Attendance', 'student_id');
+    }
+
 }

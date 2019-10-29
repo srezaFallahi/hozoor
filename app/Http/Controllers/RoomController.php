@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Day;
 use App\Grade;
 use App\Http\Requests\RoomEditRequest;
 use App\Http\Requests\RoomRequest;
@@ -42,8 +43,12 @@ class RoomController extends Controller
     public function store(RoomRequest $request)
     {
         $data = $request->all();
+        $days = Day::find($request->daysArray);
         $manager = Manager::find(1);
-        $manager->room()->create($data);
+        $room = $manager->room()->create($data);
+        foreach ($days as $day) {
+            $room->days()->save($day);
+        }
         return redirect('/class/show');
     }
 
@@ -61,7 +66,7 @@ class RoomController extends Controller
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
         $num = 1;
-        return view('class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
+        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
     }
 
     /**
@@ -117,11 +122,11 @@ class RoomController extends Controller
 
     public function showClassStudent(Request $request)
     {
-        $id = $request->room_id;
-        $class = Room::find($id);
+        $class_id = $request->room_id;
+        $class = Room::find($class_id);
         $students = $class->students()->get();
         $num = 1;
-        return view('student.index', compact('students', 'num'));
+        return view('admin.student.index', compact('students', 'num', 'class'));
     }
 
     public function gradeClass(Request $request)
@@ -132,7 +137,7 @@ class RoomController extends Controller
         $students = $grade->student()->get();
         $teachers = Teacher::all()->where('manager_id', '=', 1);
         $num = 1;
-        return view('class.grade-index', compact('classes', 'grade', 'num', 'students', 'teachers'));
+        return view('admin.class.grade-index', compact('classes', 'grade', 'num', 'students', 'teachers'));
     }
 
     public function teacherClass(Request $request)
@@ -143,6 +148,6 @@ class RoomController extends Controller
         $students = Student::all()->where('manager_id', '=', 1);
         $grades = Grade::all()->where('manager_id', '=', 1);
         $num = 1;
-        return view('class.teacher-class', compact('classes', 'grades', 'num', 'students', 'teacher'));
+        return view('admin.class.teacher-class', compact('classes', 'grades', 'num', 'students', 'teacher'));
     }
 }

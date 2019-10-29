@@ -137,7 +137,10 @@
                             <select class="browser-default custom-select" name="teacher_id">
                                 <option selected>معلم</option>
                                 <option
-                                    value="{{$teacher->id}}">{{$teacher->first_name}} {{$teacher->last_name}}</option>
+                                    @foreach($teacher->users as $temp)
+                                    value="{{$teacher->id}}">{{$temp->first_name}} {{$temp->last_name}}
+                                    @endforeach
+                                </option>
                             </select>
                             @error('grade_id')
                             <div class="alert alert-danger text-right"

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManagerRequest;
 use App\Http\Requests\TeacherRequest;
+use App\Manager;
 use App\Teacher;
+use App\User;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
@@ -26,6 +29,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
+        return view('admin.manager-admin.add');
     }
 
     /**
@@ -34,8 +38,14 @@ class ManagerController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TeacherRequest $request)
+    public function store(ManagerRequest $request)
     {
+        $data = $request->all();
+        $user = User::create($data);
+        $id = $user->id;
+        $user = User::find($id);
+        Manager::create()->users()->save($user);
+
 
     }
 

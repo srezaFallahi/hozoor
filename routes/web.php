@@ -26,12 +26,14 @@ Route::resource('/teacher', 'TeacherController');
 Route::resource('/student', 'StudentController');
 Route::resource('/grade', 'GradeController');
 Route::resource('/class', 'RoomController');
+Route::resource('/manager', 'ManagerController');
 Route::post('/class/add', 'RoomController@addStudent')->name('add-student');
 Route::post('/class/showStudent', 'RoomController@showClassStudent')->name('show-student');
 Route::post('/class/grade-class', 'RoomController@gradeClass')->name('grade-class');
 Route::post('/class/teacher-class', 'RoomController@teacherClass')->name('teacher-class');
-
-Auth::routes();
+Route::resource('/attendance', 'AttendanceController');
+Route::post('/attendance/{id}', 'AttendanceController@multiAdd')->name('doAttendance');
+Route::post('/showAttendance/{student_id}', 'AttendanceController@showStudentAttendance')->name('oneStudentAttendance');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

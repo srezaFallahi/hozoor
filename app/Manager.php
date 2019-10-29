@@ -34,4 +34,9 @@ class Manager extends Model
     {
         return $this->hasOne('App\Student');
     }
+
+    public function users()
+    {
+        return $this->morphToMany('App\User', 'userable');
+    }
 }

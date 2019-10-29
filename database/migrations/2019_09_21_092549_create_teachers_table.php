@@ -16,14 +16,6 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('manager_id')->unsigned();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->integer('is_active')->nullable();
-            $table->string('username');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

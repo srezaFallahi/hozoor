@@ -149,7 +149,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                grdae
+                grade
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -205,7 +205,7 @@
 
     <!--Main layout-->
     <main class="pt-5 mx-lg-5 col-sm-9">
-        <div class="row wow fadeInUp">
+        <div class="row">
 
             <!--Grid column-->
             <div class="col-md-12 mb-4">
@@ -219,13 +219,6 @@
     @yield('out-card')
 
     <!--Grid column-->
-
-        <!--Grid row-->
-
-        <!--Grid row-->
-        <!--Grid row-->
-
-        <!--Grid row-->
 
 
     </main>
@@ -250,16 +243,6 @@
 <script type="text/javascript" src="{{asset('js/mdb.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/inter-phone.js')}}"></script>
 <!-- JQuery -->
-{{--    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
-<!-- Bootstrap tooltips -->
-{{--    <script type="text/javascript"--}}
-{{--            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>--}}
-{{--    <!-- Bootstrap core JavaScript -->--}}
-{{--    <script type="text/javascript"--}}
-{{--            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>--}}
-{{--    <!-- MDB core JavaScript -->--}}
-{{--    <script type="text/javascript"--}}
-{{--            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>--}}
 <!-- Initializations -->
 <!-- Core -->
 <script src="{{asset('jquery/jquery.min.js')}}"></script>
@@ -280,14 +263,22 @@
 
 </script>
 <script>
+    var temp;
     type = "text/javascript" >
         $(document).ready(function () {
             $(".date").pDatepicker();
+
+
         });
-    $('.observer-example').persianDatepicker({
-        observer: true,
+    $('.formatter-example').persianDatepicker({
+        observer: false,
         format: 'YYYY/MM/DD',
-        altField: '.observer-example-alt'
+        altField: '.observer-example-alt',
+        onSelect: function (unix) {
+
+            return unix;
+        }
+
     });
 </script>
 

@@ -29,4 +29,9 @@ class Room extends Model
         return $this->belongsTo('App\Grade');
     }
 
+    public function days()
+    {
+        return $this->belongsToMany('App\Day');
+    }
+
 }

@@ -2,11 +2,11 @@
 
 @section('content')
     <!-- Extended material form grid -->
-    <div class="card-header card-header-tabs  blue wow fadeInLeft">
+    <div class="card-header card-header-tabs  cyan darken-3 wow fadeInLeft">
 
         <div class="card-title text-right text-white">
             <span style="font-family: Sahel;font-size: 20px; font-weight: normal"> <i
-                    class="fas fa-user-plus"></i> اضافه کردن دانش آموز   </span>
+                    class="fas fa-user-plus"></i> ثبت نام مدیر   </span>
 
             <div class="clearfix d-md-none"></div>
 
@@ -14,7 +14,7 @@
     </div>
 
     <div class="card-body" dir="rtl">
-        <form method="post" action="{{route('student.store')}}">
+        <form method="post" action="{{route('manager.store')}}">
             <!-- Grid row -->
             @csrf
             <div class="form-row">
@@ -61,9 +61,9 @@
                     <!-- Material input -->
                     <div class=" form-group">
                         <label for="inputAddressMD" class=" col-12 text-right"
-                               style="font-family: Sahel;font-weight: bold;color: black">شماره ملی</label>
-                        <input type="text" class="form-control @error('personal_code') is-invalid @enderror"
-                               id="inputAddressMD" name="personal_code">
+                               style="font-family: Sahel;font-weight: bold;color: black"> رمزعبور</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror"
+                               id="inputAddressMD" name="password">
                         @error('password')
                         <div class="alert alert-danger text-right"
                              style="font-family: Sahel;font-weight: normal">{{$message}}</div>
@@ -74,14 +74,23 @@
                     <!-- Material input -->
                     <div class=" form-group">
                         <label for="inputAddressMD" class=" col-12 text-right"
-                               style="font-family: Sahel;font-weight: bold;color: black">مقطع</label>
-                        <select class="browser-default custom-select" name="grade_id">
-                            <option selected>مقطع</option>
-                            @foreach($grades as $grade)
-                                <option value="{{$grade->id}}">{{$grade->name}}</option>
-                            @endforeach
-                        </select>
-                        @error('grade_id')
+                               style="font-family: Sahel;font-weight: bold;color: black"> تکرار رمز
+                            عبور </label>
+                        <input type="password" name="password_confirmation" class="form-control" id="inputAddressMD">
+
+                    </div>
+                </div>
+                <!-- Grid column -->
+                <div class="col-md-6">
+                    <!-- Material input -->
+                    <div class=" form-group">
+                        <label for="inputAddress2MD" class=" col-12 text-right"
+                               style="font-family: Sahel;font-weight: bold;color: black">کد ملی </label>
+
+                        <input type="number" class="form-control @error('code') is-invalid @enderror"
+                               id="inputAddress2MD" name="code"
+                        >
+                        @error('code')
                         <div class="alert alert-danger text-right"
                              style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                         @enderror
@@ -89,32 +98,31 @@
                 </div>
                 <!-- Grid column -->
 
-                <!-- Grid column -->
+                <div class="col-md-6">
+                    <!-- Material input -->
+                    <div class=" form-group">
+                        <label for="inputAddress2MD" class=" col-12 text-right"
+                               style="font-family: Sahel;font-weight: bold;color: black">شماره موبایل </label>
+
+                        <input type="number" class="form-control @error('code') is-invalid @enderror"
+                               id="inputAddress2MD" name="phone_number"
+                        >
+                        @error('phone_number')
+                        <div class="alert alert-danger text-right"
+                             style="font-family: Sahel;font-weight: normal">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="col-md-6">
                     <!-- Material input -->
                     <div class="form-group">
-                        <label for="inputCityMD" class=" col-12 text-right @error('dad_name') is-invalid @enderror"
-                               style="font-family: Sahel;font-weight: bold;color: black">نام پدر</label>
+                        <label for="inputCityMD" class=" col-12 text-right @error('username') is-invalid @enderror"
+                               style="font-family: Sahel;font-weight: bold;color: black">نام کاربری</label>
 
-                        <input type="text" class="form-control" id="inputCityMD" name="dad_name">
-                        @error('dad_name')
-                        <div class="alert alert-danger text-right"
-                             style="font-family: Sahel;font-weight: normal">{{$message}}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <!-- Material input -->
-                    <div class=" form-group">
-                        <label for="inputAddress2MD" class=" col-12 text-right"
-                               style="font-family: Sahel;font-weight: bold;color: black"> تاریخ ورود</label>
-
-                        <input type="text" class="form-control @error('entry_date') is-invalid @enderror observer-example"
-                               id="inputAddress2MD" name="entry_date"
+                        <input type="text" class="form-control" id="inputCityMD" name="username"
                         >
-                        @error('entry_date')
+                        @error('username')
                         <div class="alert alert-danger text-right"
                              style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                         @enderror
@@ -124,13 +132,12 @@
                     <!-- Material input -->
                     <div class=" form-group">
                         <label for="inputAddress2MD" class=" col-12 text-right"
-                               style="font-family: Sahel;font-weight: bold;color: black"> تاریخ تولد</label>
+                               style="font-family: Sahel;font-weight: bold;color: black">ایمیل</label>
 
-                        <input type="text"
-                               class="form-control @error('birth_day') is-invalid @enderror  observer-example"
-                               id="inputAddress2MD" name="birth_day"
+                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                               id="inputAddress2MD" name="email"
                         >
-                        @error('birth_day')
+                        @error('email')
                         <div class="alert alert-danger text-right"
                              style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                         @enderror

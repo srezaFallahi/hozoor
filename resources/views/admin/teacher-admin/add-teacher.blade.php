@@ -6,7 +6,7 @@
 
         <div class="card-title text-right text-white">
             <span style="font-family: Sahel;font-size: 20px; font-weight: normal"> <i
-                    class="fas fa-user-plus"></i> اضافه کردن  معلم   </span>
+                    class="fas fa-user-plus"></i> اضافه کردن معلم   </span>
 
             <div class="clearfix d-md-none"></div>
 
@@ -81,8 +81,38 @@
                     </div>
                 </div>
                 <!-- Grid column -->
+                <div class="col-md-6">
+                    <!-- Material input -->
+                    <div class=" form-group">
+                        <label for="inputAddress2MD" class=" col-12 text-right"
+                               style="font-family: Sahel;font-weight: bold;color: black">کد ملی </label>
 
+                        <input type="number" class="form-control @error('code') is-invalid @enderror"
+                               id="inputAddress2MD" name="code"
+                        >
+                        @error('code')
+                        <div class="alert alert-danger text-right"
+                             style="font-family: Sahel;font-weight: normal">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
                 <!-- Grid column -->
+
+                <div class="col-md-6">
+                    <!-- Material input -->
+                    <div class=" form-group">
+                        <label for="inputAddress2MD" class=" col-12 text-right"
+                               style="font-family: Sahel;font-weight: bold;color: black">شماره موبایل </label>
+
+                        <input type="number" class="form-control @error('code') is-invalid @enderror"
+                               id="inputAddress2MD" name="phone_number"
+                        >
+                        @error('phone_number')
+                        <div class="alert alert-danger text-right"
+                             style="font-family: Sahel;font-weight: normal">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
 
                 <div class="col-md-6">
                     <!-- Material input -->
@@ -113,6 +143,7 @@
                         @enderror
                     </div>
                 </div>
+
                 <!-- Grid column -->
             </div>
             <!-- Grid row -->

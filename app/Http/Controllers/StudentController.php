@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Grade;
 use App\Http\Requests\StudentRequest;
+use App\Manager;
 use App\Student;
+use App\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -27,7 +29,7 @@ class StudentController extends Controller
     public function create()
     {
         $grades = Grade::all()->where('manager_id', '=', 1);
-        return view('student.add', compact('grades'));
+        return view('admin.student.add', compact('grades'));
     }
 
     /**
@@ -38,10 +40,17 @@ class StudentController extends Controller
      */
     public function store(StudentRequest $request)
     {
-        $data = $request->all();
-        $data['manager_id'] = 1;
 
-        Student::create($data);
+        $user['first_name'] = $request->first_name;
+        $user['last_name'] = $request->last_name;
+        $user['code'] = $request->code;
+        $student['grade_id'] = $request->grade_id;
+        $student['dad_name'] = $request->dad_name;
+        $student['birth_day'] = $request->birth_day;
+        $student['entry_date'] = $request->entry_date;
+        $manager = Manager::find(1);
+        $user = User::create($user);
+        $manager->student()->create($student)->users()->save($user);
         return redirect('/student/show');
     }
 
@@ -53,9 +62,10 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $students = Student::all();
+        $manager = Manager::find(1);
+        $students = $manager->student()->get();
         $num = 1;
-        return view('student.index', compact('students', 'num'));
+        return view('admin.student.index', compact('students', 'num'));
 
     }
 
@@ -70,7 +80,7 @@ class StudentController extends Controller
         $student = Student::find($id);
         $grades = Grade::all()->where('manager_id', '=', 1);
 
-        return view('student.edit', compact('student', 'grades'));
+        return view('admin.student.edit', compact('student', 'grades'));
     }
 
     /**
@@ -80,7 +90,7 @@ class StudentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, $id)
+    public function update($request, $id)
     {
         $student = Student::find($id);
         $student->update($request->all());

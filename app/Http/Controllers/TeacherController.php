@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TeacherRequest;
 use App\Manager;
 use App\Teacher;
+use App\User;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -26,7 +27,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher-admin.add-teacher');
+        return view('admin.teacher-admin.add-teacher');
     }
 
     /**
@@ -37,10 +38,13 @@ class TeacherController extends Controller
      */
     public function store(TeacherRequest $request)
     {
-        $teacher = $request->all();
+        $data = $request->all();
         $manager = Manager::find(1);
         $id = $manager->id;
-        $manager->teacher()->create($teacher);
+        $user = User::create($data);
+        $userId = $user->id;
+        $user = User::find($userId);
+        $manager->teacher()->create()->users()->save($user);
         return redirect(route('teacher.show', compact('id')));
     }
 
@@ -52,10 +56,10 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teachers = Teacher::all()->where('manager_id', '=', $id);
+        $teachers = Manager::find(1)->teacher()->get();
         $num = 1;
 
-        return view('teacher-admin.index', compact('teachers', 'num', 'id'));
+        return view('admin.teacher-admin.index', compact('teachers', 'num', 'id'));
     }
 
     /**
@@ -66,8 +70,8 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-        $teacher = Teacher::find($id);
-        return view('teacher-admin.edit', compact('teacher'));
+        $teacherTemp = Teacher::find($id);
+        return view('admin.teacher-admin.edit', compact('teacherTemp'));
     }
 
     /**
@@ -80,10 +84,11 @@ class TeacherController extends Controller
     public function update(TeacherRequest $request, $id)
     {
         $data = $request->all();
-
         $teacher = Teacher::find($id);
         $id = $teacher->manager_id;
-        $teacher->update($data);
+        foreach ($teacher->users as $user) {
+            $user->update($data);
+        }
         return redirect(route('teacher.show', $id));
 
     }
@@ -98,6 +103,9 @@ class TeacherController extends Controller
     public function destroy($id)
     {
         $teacher = Teacher::find($id);
+        foreach ($teacher->users as $user) {
+            $user->delete();
+        }
         $teacher->delete();
         return redirect()->back();
 

@@ -24,6 +24,7 @@
                     <th style="font-family: Sahel;font-weight: bolder">مقطع</th>
                     <th style="font-family: Sahel;font-weight: bolder">اضافه کردن دانش آموز</th>
                     <th style="font-family: Sahel;font-weight: bolder">اعضا کلاس</th>
+                    <th style="font-family: Sahel;font-weight: bolder">حضور و غیاب</th>
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
                 </tr>
@@ -34,13 +35,15 @@
 
                         <td style="font-family:Sahel;;font-weight: normal">{{$num++}}</td>
                         <td style="font-family: Sahel;font-weight: normal">{{$class->name}}</td>
-                        <td style="font-family: Sahel;font-weight: normal">{{$class->teacher->first_name}} {{$class->teacher->last_name}}</td>
+                        @foreach($class->teacher->users as $user)
+                            <td style="font-family: Sahel;font-weight: normal">{{$user->first_name}} {{$user->last_name}}</td>
+                        @endforeach
                         <td style="font-family: Sahel;font-weight: normal">{{$class->grade->name}}</td>
                         <td style="font-family: Sahel;font-weight: normal">
 
                             <div class="text-center">
                                 <button type="submit"
-                                        class="btn btn-primary btn-rounded mb-4"
+                                        class="btn btn-primary btn-rounded mb-4 col-sm-12"
                                         data-toggle="modal"
                                         data-target="#class-{{$class->id}}">
                                     اضافه کردن عضو
@@ -51,7 +54,20 @@
                             <form action="{{route('show-student')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="room_id" value="{{$class->id}}">
-                                <input type="submit" class="btn btn-warning btn-rounded mb-4" value="اعضا کلاس">
+                                <input type="submit" class="btn btn-warning btn-rounded mb-4" value="اعضاکلاس">
+                            </form>
+                        </td>
+                        <td style="font-family: Sahel;font-weight: normal">
+                            <form action="{{route('attendance.show',$class->id)}}">
+                                {{--                                @foreach($days as $day)--}}
+
+                                <button class="btn btn-info btn-rounded mb-4" type="submit">
+                                    حضورغیاب
+                                </button>
+                                {{--                                    @if($day->num_of_day==$num_day)--}}
+                                {{--                                        @break--}}
+                                {{--                                    @endif--}}
+                                {{--                                @endforeach--}}
                             </form>
                         </td>
                         <td style="font-family: Sahel;font-weight: normal">
@@ -112,7 +128,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <!-- Material input -->
                         <div class=" form-group">
                             <label for="inputAddressMD" class=" col-12 text-right"
@@ -128,8 +144,6 @@
                                  style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                             @enderror
                         </div>
-                    </div>
-                    <div class="col-3">
                         <!-- Material input -->
                         <div class=" form-group">
                             <label for="inputAddressMD" class=" col-12 text-right"
@@ -137,14 +151,57 @@
                             <select class="browser-default custom-select" name="teacher_id">
                                 <option selected>معلم</option>
                                 @foreach($teachers as $teacher)
-                                    <option
-                                        value="{{$teacher->id}}">{{$teacher->first_name}} {{$teacher->last_name}}</option>
+                                    @foreach($teacher->users as $user)
+                                        <option
+                                            value="{{$teacher->id}}">{{$user->first_name}} {{$user->last_name}}</option>
+                                    @endforeach
                                 @endforeach
                             </select>
                             @error('grade_id')
                             <div class="alert alert-danger text-right"
                                  style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                             @enderror
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row text-right">
+                            <div class="col-3">
+                                <lable style="font-family: Sahel;font-weight: bold;color: black" for="1"> شنبه</lable>
+                                <input type="checkbox" value="1" name="daysArray[]" id="1">
+                            </div>
+                            <div class="col-3">
+
+                                <lable style="font-family: Sahel;font-weight: bold;color: black" for="2"> یکشنبه</lable>
+                                <input type="checkbox" value="2" name="daysArray[]" id="2">
+                            </div>
+                            <div class="col-3">
+
+                                <lable style="font-family: Sahel;font-weight: bold;color: black" for="3"> دوشنبه</lable>
+                                <input type="checkbox" value="3" name="daysArray[]" id="3">
+                            </div>
+                            <div class="col-3">
+
+                                <lable style="font-family: Sahel;font-weight: bold;color: black" for="4"> سه شنبه
+                                </lable>
+                                <input type="checkbox" value="4" name="daysArray[]" id="4">
+                            </div>
+                            <div class="col-3">
+
+                                <lable style="font-family: Sahel;font-weight: bold;color: black" for="5"> چهارشنبه
+                                </lable>
+                                <input type="checkbox" value="5" name="daysArray[]" id="5">
+                            </div>
+                            <div class="col-3">
+
+                                <lable style="font-family: Sahel;font-weight: bold;color: black" for="6"> پنج شنبه
+                                </lable>
+                                <input type="checkbox" value="6" name="daysArray[]" id="6">
+                            </div>
+                            <div class="col-3">
+
+                                <lable style="font-family: Sahel;font-weight: bold;color: black" for="7"> جمعه</lable>
+                                <input type="checkbox" value="7" name="daysArray[]" id="7">
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
@@ -212,8 +269,10 @@
                                 <select class="browser-default custom-select" name="student_id">
                                     <option selected>دانش آموز</option>
                                     @foreach($students as $student)
-                                        <option
-                                            value="{{$student->id}}">{{$student->first_name}} {{$student->last_name}}</option>
+                                        @foreach($student->users as $user)
+                                            <option
+                                                value="{{$student->id}}">{{$user->first_name}} {{$user->last_name}}</option>
+                                        @endforeach
                                     @endforeach
                                 </select>
                                 @error('student_id')

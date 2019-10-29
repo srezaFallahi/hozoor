@@ -16,7 +16,7 @@ class StudentRoom extends Migration
         Schema::create('room_student', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('room_id')->unsigned();
-            $table->string('student_id');
+            $table->integer('student_id');
             $table->timestamps();
         });
     }

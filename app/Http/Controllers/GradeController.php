@@ -54,7 +54,7 @@ class GradeController extends Controller
     {
         $grades = Grade::all()->where('manager_id', '=', 1);
         $num = 1;
-        return view('grade.index', compact('grades', 'num'));
+        return view('admin.grade.index', compact('grades', 'num'));
     }
 
     /**
@@ -107,8 +107,8 @@ class GradeController extends Controller
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
         $num = 1;
-        return view('class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
+        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
         $num = 1;
-        return view('class.index', compact('grades', 'num'));
+        return view('admin.class.index', compact('grades', 'num'));
     }
 }

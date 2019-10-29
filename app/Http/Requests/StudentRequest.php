@@ -28,9 +28,9 @@ class StudentRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'dad_name' => 'required',
-            'personal_code' => 'required',
-            'birth_day' => 'required|date',
-            'entry_date' => 'required|date'
+            'code' => 'required',
+            'birth_day' => 'required',
+            'entry_date' => 'required',
         ];
     }
 
@@ -43,6 +43,13 @@ class StudentRequest extends FormRequest
             'first_name.alpha' => 'فقط از حروف الفبا استفاده کنید ',
             'last_name.required' => 'نام خانوادگی دانش آموز را وارد کنید',
             'last_name.alpha' => 'فقط از حروف الفبا استفاده کنید',
+            'dad_name.required' => 'نام پدر را وارد کنید',
+            'code.required' => 'کد ملی  را وارد کنید',
+            'birth_day.required' => 'تاریخ تولد را وارد کنید',
+            'birth_day.date' => 'تاریخ تولد را درست وارد کنید',
+            'entry_date.required' => 'تاریخ ورود را وارد کنید',
+            'entry_date.date' => 'تاریخ ورود را درست وارد کنید',
+
 
         ];
     }

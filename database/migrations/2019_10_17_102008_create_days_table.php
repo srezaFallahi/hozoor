@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddManagerIdToRooms extends Migration
+class CreateDaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddManagerIdToRooms extends Migration
      */
     public function up()
     {
-        Schema::table('rooms', function (Blueprint $table) {
-            $table->integer('manager_id')->unsigned();
+        Schema::create('days', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('num_of_day');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddManagerIdToRooms extends Migration
      */
     public function down()
     {
-        Schema::table('rooms', function (Blueprint $table) {
-            $table->dropColumn('manager_id');
-        });
+        Schema::dropIfExists('days');
     }
 }
