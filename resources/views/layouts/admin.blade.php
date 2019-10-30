@@ -56,7 +56,7 @@
         }
     </style>
 </head>
-<body class="grey lighten-3">
+<body class="grey  lighten-3">
 <div id="wrapper" dir="rtl">
 
     <!--Main Navigation-->

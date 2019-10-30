@@ -97,13 +97,13 @@ class AttendanceController extends Controller
         $absents = Student::find($request->attendanceFalseArray);
         if ($presents) {
             foreach ($presents as $student) {
-                $student->attendances()->create(['attendance' => 1, 'date' => now(), 'class_id' => $id]);
+                $student->attendances()->create(['manager_id' => 1, 'attendance' => 1, 'date' => now(), 'class_id' => $id]);
             }
         }
         if ($absents) {
 
             foreach ($absents as $student) {
-                $student->attendances()->create(['attendance' => 0, 'date' => now(), 'class_id' => $id]);
+                $student->attendances()->create(['manager_id' => 1, 'attendance' => 0, 'date' => now(), 'class_id' => $id]);
             }
         }
         return redirect()->back();
@@ -134,4 +134,8 @@ class AttendanceController extends Controller
 
 
     }
+
+    //get attendance of one class and Percentage
+
+
 }

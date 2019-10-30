@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Attendance;
+use App\Http\Controllers\AttendanceController;
 use App\Day;
 use App\Grade;
 use App\Http\Requests\RoomEditRequest;
@@ -11,6 +13,7 @@ use App\Room;
 use App\Student;
 use App\Teacher;
 use Illuminate\Http\Request;
+
 
 class RoomController extends Controller
 {
@@ -62,9 +65,13 @@ class RoomController extends Controller
     {
         $manager = Manager::find(1);
         $grades = $manager->grade()->get();
-        $classes = $manager->room()->get();
+        $classes1 = $manager->room()->get();
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
+        $classes = $this->getPercent($classes1);
+//        foreach ($classes as $class){
+//            echo $class->percent;
+//        }
         $num = 1;
         return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
     }
@@ -136,6 +143,7 @@ class RoomController extends Controller
         $classes = $grade->room()->get();
         $students = $grade->student()->get();
         $teachers = Teacher::all()->where('manager_id', '=', 1);
+
         $num = 1;
         return view('admin.class.grade-index', compact('classes', 'grade', 'num', 'students', 'teachers'));
     }
@@ -149,5 +157,26 @@ class RoomController extends Controller
         $grades = Grade::all()->where('manager_id', '=', 1);
         $num = 1;
         return view('admin.class.teacher-class', compact('classes', 'grades', 'num', 'students', 'teacher'));
+    }
+
+    public function getPercent($classes)
+    {
+
+        foreach ($classes as $class) {
+            $class['percent'] = $this->classAttendances($class->id);
+        }
+        return $classes;
+    }
+
+    public static function classAttendances($class_id)
+    {
+
+        $attendances = count(Attendance::all()->where('class_id', '=', $class_id));
+        $presents = count(Attendance::all()->where('class_id', '=', $class_id)->where('attendance', '=', 1));
+        if ($attendances != 0) {
+            $percent = ($presents / $attendances) * 100;
+        } else $percent = 0;
+        return $percent;
+
     }
 }

@@ -14,8 +14,8 @@
     </div>
     <div class="card-body row" dir="rtl">
 
-        <div class="container table-responsive col-9" dir="rtl">
-            <table class="table  text-center">
+        <div class="container  col-9" dir="rtl">
+            <table class="table table-responsive text-center">
                 <thead>
                 <tr>
                     <th style="font-family: Sahel;font-weight: bolder">ردیف</th>
@@ -27,12 +27,12 @@
                     <th style="font-family: Sahel;font-weight: bolder">حضور و غیاب</th>
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
+                    <th style="font-family: Sahel;font-weight: bolder">درصد حضور</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($classes as $class)
                     <tr>
-
                         <td style="font-family:Sahel;;font-weight: normal">{{$num++}}</td>
                         <td style="font-family: Sahel;font-weight: normal">{{$class->name}}</td>
                         @foreach($class->teacher->users as $user)
@@ -89,6 +89,8 @@
                                     <span>حذف</span></button>
                             </form>
                         </td>
+                        <td style="font-family: Sahel;font-weight: bold">{{$class->percent}}%</td>
+
                     </tr>
                 @endforeach
                 </tbody>
