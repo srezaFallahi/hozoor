@@ -27,6 +27,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/admin.css')}}" rel="stylesheet">
+    <link href="{{asset('js/chartZoom.js')}}" rel="script">
     <!-- Icons -->
 
 
@@ -43,9 +44,12 @@
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/date-picker.css')}}" rel="stylesheet">
 
-
     <style>
 
+        #chartdiv {
+            width: 100%;
+            height: 500px;
+        }
 
         .map-container iframe {
             left: 0;
@@ -176,17 +180,20 @@
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item ">
-                <a class="nav-link text-right " href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
+{{--            <li class="nav-item ">--}}
+                {{--                <form action="{{route('dayIndex')}}" method="post">--}}
+                {{--                    @csrf--}}
+{{--                <a class="nav-link text-right" href="{{route('dayIndex')}}">--}}
+{{--                    <i class="fas fa-fw fa-chart-area"></i>--}}
+{{--                    <span--}}
+{{--                        style="font-family: Sahel;font-weight: bold;">نمودار ها </span></a>--}}
+{{--            </li>--}}
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link text-right" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span></span></a>
             </li>
 
             <!-- Divider -->
@@ -280,7 +287,10 @@
         }
 
     });
+
 </script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+{{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--}}
 
 <!-- Charts -->
 </body>

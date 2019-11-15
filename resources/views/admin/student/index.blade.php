@@ -62,7 +62,7 @@
                             <td>
                                 <form action="{{route('oneStudentAttendance',$student->id)}}" method="post">
                                     @csrf
-                                    <input type="hidden" name="class_id" value="{{$class->id}}">
+                                    {{--                                    <input type="hidden" name="class_id" value="{{$class->id}}">--}}
                                     <input class="btn btn-info" value="وضعیت حضور و غیاب" type="submit">
                                 </form>
 

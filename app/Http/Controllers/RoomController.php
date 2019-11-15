@@ -12,6 +12,8 @@ use App\Manager;
 use App\Room;
 use App\Student;
 use App\Teacher;
+use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 
 
@@ -63,17 +65,20 @@ class RoomController extends Controller
      */
     public function show($id)
     {
+
         $manager = Manager::find(1);
         $grades = $manager->grade()->get();
-        $classes1 = $manager->room()->get();
+        $classes = $manager->room()->get();
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
-        $classes = $this->getPercent($classes1);
-//        foreach ($classes as $class){
-//            echo $class->percent;
-//        }
+        $classes = $this->getPercent($classes);
+        $tomorrow = \verta()->dayOfWeek;
+
+
+        $classes = $this->checkDay1($classes, $tomorrow);
         $num = 1;
         return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
+
     }
 
     /**
@@ -138,23 +143,25 @@ class RoomController extends Controller
 
     public function gradeClass(Request $request)
     {
+        $manager = Manager::find(1);
         $id = $request->grade_id;
-        $grade = Grade::find($id);
+        $grade = $manager->grade()->where('id', '=', $id)->first();
         $classes = $grade->room()->get();
         $students = $grade->student()->get();
-        $teachers = Teacher::all()->where('manager_id', '=', 1);
-
+        $teachers = $manager->teacher()->get();
         $num = 1;
+//        return $grade;
         return view('admin.class.grade-index', compact('classes', 'grade', 'num', 'students', 'teachers'));
     }
 
     public function teacherClass(Request $request)
     {
         $id = $request->teacher_id;
-        $teacher = Teacher::find($id);
-        $classes = $teacher->room()->get();
-        $students = Student::all()->where('manager_id', '=', 1);
-        $grades = Grade::all()->where('manager_id', '=', 1);
+        $manager = Manager::find(1);
+        $teacher = $manager->teacher()->where('id', '=', $id)->first();
+        $classes = $teacher->rooms()->get();
+        $students = $manager->student()->get();
+        $grades = $manager->grade()->get();
         $num = 1;
         return view('admin.class.teacher-class', compact('classes', 'grades', 'num', 'students', 'teacher'));
     }
@@ -163,20 +170,156 @@ class RoomController extends Controller
     {
 
         foreach ($classes as $class) {
-            $class['percent'] = $this->classAttendances($class->id);
+            $class['percent'] = $this->classAttendancesPercent($class->id);
         }
         return $classes;
     }
 
-    public static function classAttendances($class_id)
+    public static function classAttendancesPercent($class_id)
     {
-
-        $attendances = count(Attendance::all()->where('class_id', '=', $class_id));
-        $presents = count(Attendance::all()->where('class_id', '=', $class_id)->where('attendance', '=', 1));
+        $manager = Manager::find(1);
+        $attendances = count($manager->attendance()->get()->where('room_id', '=', $class_id));
+        $presents = count($manager->attendance()->get()->where('room_id', '=', $class_id)->where('attendance', '=', 1));
         if ($attendances != 0) {
             $percent = ($presents / $attendances) * 100;
+            $percent = round($percent, 2);
         } else $percent = 0;
         return $percent;
 
     }
+
+    public function getAverage($classes)
+    {
+        $average = 0;
+        foreach ($classes as $class) {
+            $average = $average + $class->percent;
+        }
+        $num = count($classes);
+        $average = $average / $num;
+        return $average;
+
+    }
+
+    public function gradeChart($grade_id)
+    {
+        $grade = Grade::find($grade_id);
+        $classes = $grade->room()->get();
+        $classes = $this->getPercent($classes);
+//        foreach ($classes as $class) {
+//            echo $class->percent;
+//        }
+        $average = $this->getAverage($classes);
+
+        return view('admin.attendance.class-attendance-chart', compact('classes', 'average'));
+    }
+
+    public function dayChart($class_id)
+    {
+        $manger = Manager::find(1);
+        $class = Room::find($class_id);
+        $numStudent = count($class->students()->get());
+        $dates = $manger->attendance()->select('date')->where('class_id', '=', $class_id)->distinct('date')->get();
+        $attendances = $manger->attendance()->where('class_id', '=', $class_id);
+        $dates = $this->getPercentOfDay($dates, $attendances, $numStudent);
+        return view('admin.attendance.day-chart', compact('dates'));
+    }
+
+    public function getPercentOfDay($dates, $attendances, $studentNum)
+    {
+        foreach ($dates as $date) {
+            $n = 0;
+
+            foreach ($attendances as $attendance) {
+                if ($attendance->date == $date && $attendance->attendance == 1) {
+                    $n++;
+                }
+
+            }
+            $percent = ($n / $studentNum) * 100;
+            $percent = round($percent, 2);
+            $date['percent'] = $percent;
+
+        }
+
+
+        return $dates;
+    }
+
+    public function checkDay1($classes, $tomorrow)
+    {
+        foreach ($classes as $class) {
+            $temp = 0;
+
+            foreach ($class->days()->get() as $day) {
+//                echo $day;
+                if ($day == $tomorrow . '') {
+                    echo 'yes';
+                    $temp = 1;
+                    break;
+                }
+            }
+            if ($temp == 1) {
+                $class['day1'] = 1 . '';
+            } else
+                $class['day1'] = 0 . '';
+
+
+        }
+
+        return $classes;
+
+
+    }
+
+    public function showAllAttendanceChart($id)
+    {
+        $manager = Manager::find(1);
+        $class = $manager->room()->where('id', '=', $id)->first();
+        $dates = $class->attendance()->distinct()->get('date');
+        $attendances = $class->attendance()->get();
+        $classStudentNum = count($attendances) / count($dates);
+        foreach ($dates as $date) {
+            $temp = 0;
+
+            foreach ($attendances as $attendance) {
+                if ($attendance->date == $date->date) {
+                    if ($attendance->attendance == 1) {
+                        echo 1 . '<br>';
+                        $temp++;
+//                        $date['date'] = date('Y,m,d', strtotime($attendance->date));
+
+
+                    }
+                }
+            }
+            $percent = ($temp / $classStudentNum) * 100;
+
+            $date['percent'] = $percent;
+        }
+        foreach ($dates as $date) {
+            $d = Carbon::create($date->date);
+            $date['date'] = $d->subDays(31);
+            $date['date'] = date('Y,m,d', strtotime($date->date));
+        }
+//        return $dates;
+//        return count($dates);
+        return view('admin.attendance.day-chart', compact('dates'));
+    }
+
+    public function viewDayChartIndex()
+    {
+//        return 1;
+        $manager = Manager::find(1);
+        $classes = $manager->room()->get();
+        return view('admin.class.charts-Index', compact('classes'));
+    }
+
+
+//    public function showAllAttendanceChart($id)
+//    {
+//
+//        $dates = $this->getPercentEverySection($id);
+//        return $dates;
+//    }
+
 }

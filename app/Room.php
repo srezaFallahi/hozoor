@@ -34,4 +34,9 @@ class Room extends Model
         return $this->belongsToMany('App\Day');
     }
 
+    public function attendance()
+    {
+        return $this->hasMany('App\Attendance');
+    }
+
 }

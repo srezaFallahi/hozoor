@@ -39,4 +39,9 @@ class Manager extends Model
     {
         return $this->morphToMany('App\User', 'userable');
     }
+
+    public function attendance()
+    {
+        return $this->hasMany('App\Attendance');
+    }
 }

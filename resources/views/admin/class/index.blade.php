@@ -2,6 +2,7 @@
 
 
 @section('content')
+
     <div class="card-header card-header-tabs deep-purple wow fadeInLeft">
 
         <div class="card-title text-right text-white">
@@ -27,11 +28,13 @@
                     <th style="font-family: Sahel;font-weight: bolder">حضور و غیاب</th>
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
+                    <th style="font-family: Sahel;font-weight: bolder">نمودار</th>
                     <th style="font-family: Sahel;font-weight: bolder">درصد حضور</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($classes as $class)
+
                     <tr>
                         <td style="font-family:Sahel;;font-weight: normal">{{$num++}}</td>
                         <td style="font-family: Sahel;font-weight: normal">{{$class->name}}</td>
@@ -46,7 +49,7 @@
                                         class="btn btn-primary btn-rounded mb-4 col-sm-12"
                                         data-toggle="modal"
                                         data-target="#class-{{$class->id}}">
-                                    اضافه کردن عضو
+                                    اضافه کن
                                 </button>
                             </div>
                         </td>
@@ -59,15 +62,12 @@
                         </td>
                         <td style="font-family: Sahel;font-weight: normal">
                             <form action="{{route('attendance.show',$class->id)}}">
-                                {{--                                @foreach($days as $day)--}}
-
-                                <button class="btn btn-info btn-rounded mb-4" type="submit">
+                                <button @if($class->day1 != 1 . '') @endif
+                                        class="btn btn-info btn-rounded mb-4"
+                                        type="submit">
                                     حضورغیاب
                                 </button>
-                                {{--                                    @if($day->num_of_day==$num_day)--}}
-                                {{--                                        @break--}}
-                                {{--                                    @endif--}}
-                                {{--                                @endforeach--}}
+
                             </form>
                         </td>
                         <td style="font-family: Sahel;font-weight: normal">
@@ -88,6 +88,14 @@
                                 <button class="btn btn-5 btn-5a icon-remove  color-2 text-white form-control col-1">
                                     <span>حذف</span></button>
                             </form>
+                        </td>
+                        <td class="col-2">
+                            <form action="{{route('dayChart',$class->id)}}" method="get">
+                                @csrf
+
+                                <input type="submit" class="btn btn-primary" value="نمودار">
+                            </form>
+
                         </td>
                         <td style="font-family: Sahel;font-weight: bold">{{$class->percent}}%</td>
 
@@ -185,13 +193,13 @@
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="4"> سه شنبه
                                 </lable>
-                                <input type="checkbox" value="4" name="daysArray[]" id="4">
+                                <input type="checkbox" value="3" name="daysArray[]" id="4">
                             </div>
                             <div class="col-3">
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="5"> چهارشنبه
                                 </lable>
-                                <input type="checkbox" value="5" name="daysArray[]" id="5">
+                                <input type="checkbox" value="4" name="daysArray[]" id="5">
                             </div>
                             <div class="col-3">
 
@@ -292,4 +300,7 @@
         </div>
     @endforeach
 @endsection
+
+
+
 

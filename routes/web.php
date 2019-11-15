@@ -34,7 +34,10 @@ Route::post('/class/teacher-class', 'RoomController@teacherClass')->name('teache
 Route::resource('/attendance', 'AttendanceController');
 Route::post('/attendance/{id}', 'AttendanceController@multiAdd')->name('doAttendance');
 Route::post('/showAttendance/{student_id}', 'AttendanceController@showStudentAttendance')->name('oneStudentAttendance');
-
+Route::post('/showAttendance/{student_id}', 'AttendanceController@showStudentAttendance')->name('oneStudentAttendance');
+Route::get('/class/chart/{grade_id}', 'RoomController@gradeChart')->name('gradeChart');
+Route::get('/class/dayChart/{id}', 'RoomController@showAllAttendanceChart')->name('dayChart');
+//Route::get('/class/dayIndex/{id}', 'RoomController@viewDayChartIndex')->name('dayIndex');
 Route::get('/home', 'HomeController@index')->name('home');
 
 

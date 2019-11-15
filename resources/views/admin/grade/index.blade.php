@@ -23,6 +23,7 @@
                     <th style="font-family: Sahel;font-weight: bolder"> کلاس ها</th>
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
+                    <th style="font-family: Sahel;font-weight: bolder">نمودار</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -58,6 +59,7 @@
                                     <span>حذف</span></button>
                             </form>
                         </td>
+                        <td><a href="{{route('gradeChart',$grade->id)}}" class="btn btn-info">نمودار</a></td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -15,9 +15,9 @@ class Teacher extends Model
         return $this->belongsTo('App\Manager');
     }
 
-    public function room()
+    public function rooms()
     {
-        return $this->hasOne('App\Room');
+        return $this->hasMany('App\Room');
     }
 
     public function users()

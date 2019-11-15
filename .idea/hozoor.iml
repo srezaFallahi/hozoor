@@ -95,5 +95,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="animated" level="application" />
+    <orderEntry type="library" name="charts" level="application" />
+    <orderEntry type="library" name="core" level="application" />
   </component>
 </module>

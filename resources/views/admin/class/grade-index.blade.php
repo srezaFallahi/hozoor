@@ -119,7 +119,7 @@
                                    style="font-family: Sahel;font-weight: bold;color: black">مقطع</label>
                             <select class="browser-default custom-select" name="grade_id">
                                 <option selected>مقطع</option>
-                                <option value="{{$grade->id}}">{{$grade->name}}</option>
+                                <option value="">{{$grade->name}}</option>
                             </select>
                             @error('grade_id')
                             <div class="alert alert-danger text-right"

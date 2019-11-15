@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Attendance;
 use App\Room;
 use App\Student;
+use Carbon\Carbon;
+use Cassandra\Date;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 
@@ -97,13 +99,13 @@ class AttendanceController extends Controller
         $absents = Student::find($request->attendanceFalseArray);
         if ($presents) {
             foreach ($presents as $student) {
-                $student->attendances()->create(['manager_id' => 1, 'attendance' => 1, 'date' => now(), 'class_id' => $id]);
+                $student->attendances()->create(['manager_id' => 1, 'attendance' => 1, 'date' => Carbon::now()->toDateString(), 'room_id' => $id]);
             }
         }
         if ($absents) {
 
             foreach ($absents as $student) {
-                $student->attendances()->create(['manager_id' => 1, 'attendance' => 0, 'date' => now(), 'class_id' => $id]);
+                $student->attendances()->create(['manager_id' => 1, 'attendance' => 0, 'date' => now(), 'room_id' => $id]);
             }
         }
         return redirect()->back();
@@ -117,7 +119,7 @@ class AttendanceController extends Controller
 
         $student = Student::find($student_id);
         $class = Room::find($class_id);
-        $attendances = $student->attendances()->where('class_id', '=', $class_id)->get();
+        $attendances = $student->attendances()->where('room_id', '=', $class_id)->get();
         $num = 1;
         $chartNum = 1;
 
@@ -130,9 +132,7 @@ class AttendanceController extends Controller
     {
         $student = Student::find($student_id);
         $num = 1;
-        $attendances = $student->attendances()->where('class_id', '=', $class_id)->where('date', '=', $date)->get();
-
-
+        $attendances = $student->attendances()->where('room_id', '=', $class_id)->where('date', '=', $date)->get();
     }
 
     //get attendance of one class and Percentage
