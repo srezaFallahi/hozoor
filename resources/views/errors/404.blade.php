@@ -32,7 +32,7 @@
     <div class="buttons-con">
         <div class="action-link-wrap">
             <a onclick="history.back(-1)" class="link-button link-back-button">برگشت</a>
-            <a href="" class="link-button">برگشت به صفحه اصلی</a>
+            <a href="{{route('index')}}" class="link-button">برگشت به صفحه اصلی</a>
         </div>
     </div>
 </div>

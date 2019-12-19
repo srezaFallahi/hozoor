@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Manager extends Model
 {
+    protected $guarded = 'manager';
     protected $fillable = [
         'first_name',
         'last_name',
@@ -44,4 +45,5 @@ class Manager extends Model
     {
         return $this->hasMany('App\Attendance');
     }
+
 }

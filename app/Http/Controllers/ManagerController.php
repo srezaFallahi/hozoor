@@ -8,6 +8,7 @@ use App\Manager;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
@@ -40,7 +41,9 @@ class ManagerController extends Controller
      */
     public function store(ManagerRequest $request)
     {
+        $usr = User::find(1);
         $data = $request->all();
+        $data['password'] = Hash::make($request['password']);
         $user = User::create($data);
         $id = $user->id;
         $user = User::find($id);

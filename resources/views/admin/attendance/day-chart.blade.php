@@ -93,8 +93,6 @@
             var series = [{
                 type: 'area',
                 name: 'percent',
-                // pointInterval: 48 * 3600 * 1000,
-                // pointStart: Date.UTC(2008, 1, 5),
                 data: [
 
                         @foreach($dates as $date)

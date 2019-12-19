@@ -12,16 +12,17 @@
 */
 
 use App\Http\Controllers\ManagerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('layouts.index');
-});
+})->name('index');
 
-Route::resource('/manager', 'ManagerController');
 Route::get('/admin', function () {
     return view('layouts.admin');
 });
+Route::resource('/manager', 'ManagerController');
 Route::resource('/teacher', 'TeacherController');
 Route::resource('/student', 'StudentController');
 Route::resource('/grade', 'GradeController');
@@ -41,3 +42,37 @@ Route::get('/class/dayChart/{id}', 'RoomController@showAllAttendanceChart')->nam
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Auth::routes();
+
+Route::get('/login/manager', 'Auth\LoginController@showManagerLoginForm');
+Route::get('/login/writer', 'Auth\LoginController@showWriterLoginForm');
+//Route::get('/register/manager', 'Auth\RegisterController@showAdminRegisterForm');
+//Route::get('/register/writer', 'Auth\RegisterController@showWriterRegisterForm');
+
+Route::post('/login/manager', 'Auth\LoginController@managerLogin');
+Route::post('/login/teacher', 'Auth\LoginController@teacherLogin');
+//Route::post('/register/manager', 'Auth\RegisterController@createAdmin');
+//Route::post('/register/writer', 'Auth\RegisterController@createWriter');
+
+Route::view('/home', 'home')->middleware('auth');
+Route::view('/admin', 'layouts.admin');
+//Route::view('/writer', 'writer');
+
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

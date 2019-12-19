@@ -74,8 +74,9 @@ class RoomController extends Controller
         $classes = $this->getPercent($classes);
         $tomorrow = \verta()->dayOfWeek;
 
-
+//        return $tomorrow;
         $classes = $this->checkDay1($classes, $tomorrow);
+//        return $classes;
         $num = 1;
         return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
 
@@ -205,9 +206,6 @@ class RoomController extends Controller
         $grade = Grade::find($grade_id);
         $classes = $grade->room()->get();
         $classes = $this->getPercent($classes);
-//        foreach ($classes as $class) {
-//            echo $class->percent;
-//        }
         $average = $this->getAverage($classes);
 
         return view('admin.attendance.class-attendance-chart', compact('classes', 'average'));
@@ -249,14 +247,12 @@ class RoomController extends Controller
     {
         foreach ($classes as $class) {
             $temp = 0;
-
             foreach ($class->days()->get() as $day) {
-//                echo $day;
-                if ($day == $tomorrow . '') {
-                    echo 'yes';
+                if ($day->num_of_day == $tomorrow . '') {
                     $temp = 1;
                     break;
                 }
+
             }
             if ($temp == 1) {
                 $class['day1'] = 1 . '';
@@ -284,11 +280,7 @@ class RoomController extends Controller
             foreach ($attendances as $attendance) {
                 if ($attendance->date == $date->date) {
                     if ($attendance->attendance == 1) {
-                        echo 1 . '<br>';
                         $temp++;
-//                        $date['date'] = date('Y,m,d', strtotime($attendance->date));
-
-
                     }
                 }
             }
