@@ -42,4 +42,21 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\userables');
     }
+
+    public function isManager()
+    {
+        if ($this->userable->userable_type == 'App\Manager') {
+            return true;
+
+        }
+        return false;
+    }
+
+    public function isTeacher()
+    {
+        if ($this->userable->userable_type == 'App\Teacher') {
+            return true;
+        }
+        return false;
+    }
 }

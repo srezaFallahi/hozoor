@@ -2,11 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\userables;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class managerLogin
+class TeacherManager
 {
     /**
      * Handle an incoming request.
@@ -17,15 +16,9 @@ class managerLogin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->isManager()) {
-                return $next($request);
-
-            }
+        if (Auth::user()->isManager() || Auth::user()->isTeacher()) {
+            return $next($request);
         }
         return redirect('/er');
-
     }
-
-
 }

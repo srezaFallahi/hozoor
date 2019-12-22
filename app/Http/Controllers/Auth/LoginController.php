@@ -25,7 +25,12 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/er';
+
+    public function showLoginForm()
+    {
+        return view('loginpage');
+    }
 
     /**
      * Create a new controller instance.

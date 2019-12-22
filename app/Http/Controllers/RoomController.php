@@ -15,6 +15,7 @@ use App\Teacher;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class RoomController extends Controller
@@ -76,9 +77,11 @@ class RoomController extends Controller
 
 //        return $tomorrow;
         $classes = $this->checkDay1($classes, $tomorrow);
+        $role = Auth::user()->userable->userable_type;
+
 //        return $classes;
         $num = 1;
-        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
+        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students', 'role'));
 
     }
 

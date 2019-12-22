@@ -1,5 +1,8 @@
-@extends('layouts.admin')
-
+@if($role=='App\Manager')
+    @extends('layouts.admin')
+@else
+    @extends('layouts.teacherAdmin')
+@endif
 @section('content')
     <!-- Extended material form grid -->
     <div class="card-header card-header-tabs  cyan darken-3 wow fadeInLeft">

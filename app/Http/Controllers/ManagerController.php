@@ -49,7 +49,6 @@ class ManagerController extends Controller
         $user = User::find($id);
         Manager::create()->users()->save($user);
 
-
     }
 
     /**

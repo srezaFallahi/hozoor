@@ -7,6 +7,8 @@ use App\Manager;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
@@ -27,7 +29,9 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('admin.teacher-admin.add-teacher');
+        $role = Auth::user()->userable->userable_type;
+
+        return view('admin.teacher-admin.add-teacher',compact('role'));
     }
 
     /**
@@ -41,6 +45,7 @@ class TeacherController extends Controller
         $data = $request->all();
         $manager = Manager::find(1);
         $id = $manager->id;
+        $data['password'] = Hash::make($request['password']);
         $user = User::create($data);
         $userId = $user->id;
         $user = User::find($userId);
@@ -58,8 +63,8 @@ class TeacherController extends Controller
     {
         $teachers = Manager::find(1)->teacher()->get();
         $num = 1;
-
-        return view('admin.teacher-admin.index', compact('teachers', 'num', 'id'));
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.teacher-admin.index', compact('teachers', 'num', 'id', 'role'));
     }
 
     /**

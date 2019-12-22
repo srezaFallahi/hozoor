@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Cassandra\Date;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AttendanceController extends Controller
 {
@@ -54,7 +55,9 @@ class AttendanceController extends Controller
         $students = $class->students()->get();
         $num = 1;
         $attendance = 1;
-        return view('admin.attendance.index', compact('students', 'num', 'class', 'attendance'));
+        $role = Auth::user()->userable->userable_type;
+
+        return view('admin.attendance.index', compact('students', 'num', 'class', 'attendance','role'));
     }
 
     /**
@@ -116,14 +119,14 @@ class AttendanceController extends Controller
     public function showStudentAttendance(Request $request, $student_id)
     {
         $class_id = $request->class_id;
-
+        $role = Auth::user()->userable->userable_type;
         $student = Student::find($student_id);
         $class = Room::find($class_id);
         $attendances = $student->attendances()->where('room_id', '=', $class_id)->get();
         $num = 1;
         $chartNum = 1;
 
-        return view('admin.attendance.attendance-show', compact('student', 'attendances', 'class', 'num', 'chartNum'));
+        return view('admin.attendance.attendance-show', compact('student', 'attendances', 'class', 'num', 'chartNum','role'));
     }
 
     // show all  attendance of student in one class and in  Specific date
@@ -132,6 +135,7 @@ class AttendanceController extends Controller
     {
         $student = Student::find($student_id);
         $num = 1;
+
         $attendances = $student->attendances()->where('room_id', '=', $class_id)->where('date', '=', $date)->get();
     }
 

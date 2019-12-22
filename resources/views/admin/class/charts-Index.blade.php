@@ -1,5 +1,8 @@
-@extends('layouts.admin')
-
+@if($role=='App\Manager')
+    @extends('layouts.admin')
+@else
+    @extends('layouts.teacherAdmin')
+@endif
 
 @section('content')
 

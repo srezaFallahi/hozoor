@@ -8,6 +8,8 @@ use App\Manager;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -29,7 +31,9 @@ class StudentController extends Controller
     public function create()
     {
         $grades = Grade::all()->where('manager_id', '=', 1);
-        return view('admin.student.add', compact('grades'));
+        $role = Auth::user()->userable->userable_type;
+
+        return view('admin.student.add', compact('grades', 'role'));
     }
 
     /**
@@ -49,6 +53,8 @@ class StudentController extends Controller
         $student['birth_day'] = $request->birth_day;
         $student['entry_date'] = $request->entry_date;
         $manager = Manager::find(1);
+        $user['password'] = Hash::make($request['password']);
+
         $user = User::create($user);
         $manager->student()->create($student)->users()->save($user);
         return redirect('/student/show');
@@ -65,7 +71,9 @@ class StudentController extends Controller
         $manager = Manager::find(1);
         $students = $manager->student()->get();
         $num = 1;
-        return view('admin.student.index', compact('students', 'num'));
+        $role = Auth::user()->userable->userable_type;
+
+        return view('admin.student.index', compact('students', 'num', 'role'));
 
     }
 

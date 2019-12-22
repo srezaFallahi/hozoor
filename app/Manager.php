@@ -46,4 +46,5 @@ class Manager extends Model
         return $this->hasMany('App\Attendance');
     }
 
+
 }

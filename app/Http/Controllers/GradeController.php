@@ -7,6 +7,7 @@ use App\Http\Requests\GradeRequest;
 use App\Manager;
 use App\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GradeController extends Controller
 {
@@ -54,7 +55,9 @@ class GradeController extends Controller
     {
         $grades = Grade::all()->where('manager_id', '=', 1);
         $num = 1;
-        return view('admin.grade.index', compact('grades', 'num'));
+        $role = Auth::user()->userable->userable_type;
+
+        return view('admin.grade.index', compact('grades', 'num','role'));
     }
 
     /**
@@ -106,9 +109,10 @@ class GradeController extends Controller
         $grades = $manager->grade()->get();
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
+        $role = Auth::user()->userable->userable_type;
         $num = 1;
-        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students'));
-        $num = 1;
-        return view('admin.class.index', compact('grades', 'num'));
+        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students','role'));
+//        $num = 1;
+//        return view('admin.class.index', compact('grades', 'num'));
     }
 }
