@@ -1,61 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <title>@MediaCall</title>
-    <link rel="stylesheet" href="{{asset('css/login.css')}}">
+    <title>Hozoor</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="{{asset('login.css')}}">
 
 </head>
 <body>
 
-<div class="page">
-    <div class="container">
-        <div class="left">
-            <div class="login">مدیاکال | @MediaCall</div>
-            <div class="eula">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک
-                است.
+<div class="login">
+    <form action="{{route('login')}}" method="POST">
+        @csrf
+        <div class="form">
+            <h2>ورود</h2>
+
+            <div class="form-field">
+                <label for="login-mail"><i class="fa fa-user"></i></label>
+                <input id="login-mail" type="text" name="email" placeholder="ایمیل"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+                <svg>
+                    <use href="#svg-check"/>
+                </svg>
             </div>
-        </div>
-        <div class="right">
-            <svg viewBox="0 0 320 300">
-                <defs>
-                    <linearGradient
-                        inkscape:collect="always"
-                        id="linearGradient"
-                        x1="13"
-                        y1="193.49992"
-                        x2="307"
-                        y2="193.49992"
-                        gradientUnits="userSpaceOnUse">
-                        <stop
-                            style="stop-color:#ff00ff;"
-                            offset="0"
-                            id="stop876"/>
-                        <stop
-                            style="stop-color:#ff0000;"
-                            offset="1"
-                            id="stop878"/>
-                    </linearGradient>
-                </defs>
-                <path
-                    d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143"/>
-            </svg>
-            <div class="form">
-                <form action="{{route('login')}}" method="POST">
-                    @csrf
-                    <label for="email">ایمیل</label>
-                    <input type="email" id="email" name="email">
-                    <label for="password">پسورد</label>
-                    <input type="password" id="password" name="password">
-                    <input type="submit" id="submit" value="تایید">
-                </form>
+            <div class="form-field">
+                <label for="login-password"><i class="fa fa-lock"></i></label>
+                <input id="login-password" type="password" name="password" placeholder="رمزعبور" pattern=".{6,}"
+                       required>
+                <svg>
+                    <use href="#svg-check"/>
+                </svg>
             </div>
+            <button type="submit" class="button">
+                <div class="arrow-wrapper">
+                    <span class="arrow"></span>
+                </div>
+                <p class="button-text">ورود</p>
+            </button>
+
         </div>
+    </form>
+    <div class="finished">
+        <svg>
+            <use href="#svg-check"/>
+        </svg>
     </div>
 </div>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js'></script>
-<script src="{{asset('js/login.js')}}"></script>
+<svg style="display:none;">
+    <symbol id="svg-check" viewBox="0 0 130.2 130.2">
+        <polyline points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+    </symbol>
+</svg>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src="{{asset('login.js')}}"></script>
 
 </body>
 </html>

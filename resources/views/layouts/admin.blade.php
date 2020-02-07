@@ -61,10 +61,11 @@
     </style>
 </head>
 <body class="grey  lighten-3">
-<div id="wrapper" dir="rtl">
+<div id="wrapper" dir="ltr">
 
     <!--Main Navigation-->
     <header>
+
 
         <!-- Navbar -->
         <!-- Sidebar -->
@@ -73,21 +74,27 @@
             id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin2.blade.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15 ">
                     <i class="fas fa-laugh-wink animated bounce infinite"></i>
                 </div>
+                @permission('manager-controller')
+                <div class="sidebar-brand-text mx-3">پنل ادمین</div>
+                @endpermission
+                @permission('student-controller')
                 <div class="sidebar-brand-text mx-3">پنل مدیریت</div>
-            </a>
+                @endpermission
+            </a>>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link text-right" href="admin2.blade.php">
+                <a class="nav-link text-right" href="">
+                    <span style="font-family: Sahel;font-weight: bold;font-size: 18px">داشبورد</span>
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span style="font-family: Sahel;font-weight: bold;font-size: 18px">داشبورد</span></a>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -99,102 +106,98 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+            @permission('teacher-controller')
+
             <li class="nav-item float-left">
                 <a class="nav-link collapsed text-right" href="#" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-chalkboard-teacher"></i>
                     <span style="font-family: Sahel;font-weight: bold;font-size: 15px">معلمین</span>
+                    <i class="fas fa-chalkboard-teacher"></i>
+
                 </a>
+
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2  collapse-inner rounded">
-                        {{--                            <h6 class="collapse-header">:</h6>--}}
+                        <h6 class="collapse-header">:</h6>
                         <a class="collapse-item text-right" href="{{route('teacher.create')}}"
-                           style="font-family: Sahel;font-weight: bolder;font-size: 15px"><i
-                                class="fas fa-user-plus"></i> اضافه کردن</a>
-                        <a class="collapse-item text-right" href="{{route('teacher.show',1)}}"
-                           style="font-family: Sahel;font-weight: bolder;font-size: 15px"><i
-                                class="fas fa-users"></i> نمایش معلمین</a>
+                           style="font-family: Sahel;font-weight: bolder;font-size: 15px"> اضافه کردن<i
+                                class="fas fa-user-plus"></i> </a>
+                        <a class="collapse-item text-right"
+                           href="{{route('teacher.show',Auth::user()->userable->userable_id)}}"
+                           style="font-family: Sahel;font-weight: bolder;font-size: 15px"> نمایش معلمین
+                            <i class="fas fa-users"> </i></a>
                     </div>
                 </div>
             </li>
-
+            @endpermission
             <!-- Nav Item - Utilities Collapse Menu -->
+            @permission('teacher-controller')
             <li class="nav-item">
                 <a class="nav-link  text-right collapsed" href="" data-toggle="collapse"
                    data-target="#collapseUtilities"
                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-user-graduate"></i> <span>دانش آموزان</span>
+                    <span>دانش آموزان</span>
+                    <i class="fas fa-user-graduate"></i>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-expanded="false" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item text-right" href="{{route('student.create')}}"><i
-                                class="fas fa-user-plus"></i> اضافه کردن </a>
-                        <a class="collapse-item text-right" href="{{route('student.show',1)}}"> <i
+                        <a class="collapse-item text-right" href="{{route('student.create')}}">اضافه کردن<i
+                                class="fas fa-user-plus"></i> </a>
+                        <a class="collapse-item text-right"
+                           href="{{route('student.show',Auth::user()->userable->userable_id)}}">نمایش دانش آموزان <i
                                 class="fas fa-users"></i>
-                            نمایش دانش آموزان</a>
+                        </a>
                     </div>
                 </div>
             </li>
+            @endpermission
+            @permission('teacher-controller')
+
             <li class="nav-item">
-                <a class="nav-link text-right" href="{{route('grade.show',1)}}">
+                <a class="nav-link text-right" href="{{route('grade.show',Auth::user()->userable->userable_id)}}">
+                    <span style="font-family: Sahel;font-weight: bold;">مقطع</span>
                     <i class="fas fa-graduation-cap"></i>
-                    <span style="font-family: Sahel;font-weight: bold;">مقطع</span></a>
+                </a>
             </li>
+            @endpermission
+            @permission('student-controller')
+
             <li class="nav-item">
-                <a class="nav-link text-right" href="{{route('class.show',1)}}">
-                    <i class="fas fa-chalkboard"></i> <span
-                        style="font-family: Sahel;font-weight: bold;">کلاس</span></a>
+                <a class="nav-link text-right" href="{{route('class.show',Auth::user()->userable->userable_id)}}">
+                     <span
+                         style="font-family: Sahel;font-weight: bold;">کلاس</span>
+                    <i class="fas fa-chalkboard"></i></a>
             </li>
-
+            @endpermission
             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                grade
-            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed text-right" href="#" data-toggle="collapse"
-                   data-target="#collapsePages"
-                   aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                <a class="nav-link collapsed text-right" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <span>خروج</span>
+                    <i class="fas fa-sign-out-alt"></i>
                 </a>
-                <div id="collapsePages" class="collapse text-right" aria-labelledby="headingPages"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
             </li>
 
             <!-- Nav Item - Charts -->
-{{--            <li class="nav-item ">--}}
-                {{--                <form action="{{route('dayIndex')}}" method="post">--}}
-                {{--                    @csrf--}}
-{{--                <a class="nav-link text-right" href="{{route('dayIndex')}}">--}}
-{{--                    <i class="fas fa-fw fa-chart-area"></i>--}}
-{{--                    <span--}}
-{{--                        style="font-family: Sahel;font-weight: bold;">نمودار ها </span></a>--}}
-{{--            </li>--}}
+        {{--            <li class="nav-item ">--}}
+        {{--                <form action="{{route('dayIndex')}}" method="post">--}}
+        {{--                    @csrf--}}
+        {{--                <a class="nav-link text-right" href="{{route('dayIndex')}}">--}}
+        {{--                    <i class="fas fa-fw fa-chart-area"></i>--}}
+        {{--                    <span--}}
+        {{--                        style="font-family: Sahel;font-weight: bold;">نمودار ها </span></a>--}}
+        {{--            </li>--}}
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link text-right" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span></span></a>
-            </li>
+        <!-- Nav Item - Tables -->
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -217,7 +220,13 @@
             <!--Grid column-->
             <div class="col-md-12 mb-4">
                 <div class="card">
+                    @if(Session::has('massage'))
+                        <div class="alert alert-primary float-right text-right" role="alert">
+                            {{Session::get('massage')}}
+                        </div>
+                    @endif
                     @yield('content')
+
                 </div>
 
             </div>

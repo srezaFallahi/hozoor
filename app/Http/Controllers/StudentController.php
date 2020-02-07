@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Grade;
 use App\Http\Requests\StudentRequest;
 use App\Manager;
+use App\Role;
 use App\Student;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends Controller
 {
@@ -30,7 +32,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $grades = Grade::all()->where('manager_id', '=', 1);
+        $grades = Grade::all()->where('manager_id', '=', Auth::user()->userable->userable_id);
         $role = Auth::user()->userable->userable_type;
 
         return view('admin.student.add', compact('grades', 'role'));
@@ -52,11 +54,15 @@ class StudentController extends Controller
         $student['dad_name'] = $request->dad_name;
         $student['birth_day'] = $request->birth_day;
         $student['entry_date'] = $request->entry_date;
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $user['password'] = Hash::make($request['password']);
 
         $user = User::create($user);
+        $role = Role::find(4);
+        $user->roles()->save($role);
         $manager->student()->create($student)->users()->save($user);
+
+        Session::flash('massage', 'دانش آموز ساخته شد:)');
         return redirect('/student/show');
     }
 
@@ -68,7 +74,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $students = $manager->student()->get();
         $num = 1;
         $role = Auth::user()->userable->userable_type;
@@ -86,9 +92,9 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = Student::find($id);
-        $grades = Grade::all()->where('manager_id', '=', 1);
-
-        return view('admin.student.edit', compact('student', 'grades'));
+        $grades = Grade::all()->where('manager_id', '=', Auth::user()->userable->userable_id);
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.student.edit', compact('student', 'grades', 'role'));
     }
 
     /**
@@ -102,6 +108,7 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $student->update($request->all());
+        Session::flash('massage', 'دانش آموز ویرایش شد:)');
         return redirect('/student/show');
     }
 
@@ -115,6 +122,7 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
         $student->delete();
+        Session::flash('massage', 'دانش آموز حذف شد');
         return redirect()->back();
     }
 

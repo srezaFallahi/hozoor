@@ -2,11 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\userables;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class managerLogin
+class adminPage
 {
     /**
      * Handle an incoming request.
@@ -15,17 +14,16 @@ class managerLogin
      * @param \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public
+    function handle($request, Closure $next, $permission)
     {
+        $user = Auth::user();
         if (Auth::check()) {
-            if (Auth::user()->isManager()) {
+            if ($user->hasPermission($permission)) {
                 return $next($request);
-
-            }
+            } else
+                return redirect('/login');
         }
-        return redirect('/er');
-
+        return redirect('/login');
     }
-
-
 }

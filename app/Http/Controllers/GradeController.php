@@ -8,6 +8,7 @@ use App\Manager;
 use App\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class GradeController extends Controller
 {
@@ -40,8 +41,9 @@ class GradeController extends Controller
     public function store(GradeRequest $request)
     {
         $data = $request->all();
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $manager->grade()->create($data);
+        Session::flash('massage', 'مقطع ساخته شد.');
         return redirect('/grade/show');
     }
 
@@ -53,11 +55,11 @@ class GradeController extends Controller
      */
     public function show($id)
     {
-        $grades = Grade::all()->where('manager_id', '=', 1);
+        $grades = Grade::all()->where('manager_id', '=', Auth::user()->userable->userable_id);
         $num = 1;
         $role = Auth::user()->userable->userable_type;
 
-        return view('admin.grade.index', compact('grades', 'num','role'));
+        return view('admin.grade.index', compact('grades', 'num', 'role'));
     }
 
     /**
@@ -82,6 +84,7 @@ class GradeController extends Controller
     {
         $grade = Grade::find($id);
         $grade->update($request->all());
+        Session::flash('grade-update', 'مقطع ویرایش شد.');
         return redirect('/grade/show');
 
     }
@@ -96,6 +99,8 @@ class GradeController extends Controller
     {
         $grade = Grade::find($id);
         $grade->delete();
+        Session::flash('grade-delete', 'مقطع حذف  شد.');
+
         return redirect('/grade/show');
 
     }
@@ -105,13 +110,13 @@ class GradeController extends Controller
         $id = $request->id;
         $grades = Grade::find($id);
         $class = $grades->room()->get();
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $grades = $manager->grade()->get();
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
         $role = Auth::user()->userable->userable_type;
         $num = 1;
-        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students','role'));
+        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students', 'role'));
 //        $num = 1;
 //        return view('admin.class.index', compact('grades', 'num'));
     }

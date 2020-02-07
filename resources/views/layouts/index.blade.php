@@ -57,7 +57,7 @@
                        style="font-family: Sahel;font-weight: bold">درباره ما</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"
+                    <a class="nav-link" href="{{route('login')}}"
                        style="font-family: Sahel;font-weight: bold" target="_blank">ورود/ثبت نام</a>
                 </li>
                 <li class="nav-item">
@@ -105,11 +105,11 @@
 
 <!--Main layout-->
 <main>
-    <div class="container" >
+    <div class="container">
 
         <!--Section: Main info-->
         <!--Section: Not enough-->
-        <section class="" >
+        <section class="">
 
             <h2 class="my-5 h3 text-center wow fadeInUpBig" style="font-family: Sahel;font-weight:bold">ویژگی ها</h2>
 
@@ -140,7 +140,7 @@
                             <i class="fas fa-check-circle fa-2x indigo-text"></i>
                         </div>
                         <div class="col-10">
-                            <h6 class="feature-title"style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
+                            <h6 class="feature-title" style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
                             <p class="grey-text">An impressive collection of flexible components allows you to develop
                                 any project.
                             </p>
@@ -155,7 +155,7 @@
                             <i class="fas fa-check-circle fa-2x indigo-text"></i>
                         </div>
                         <div class="col-10">
-                            <h6 class="feature-title"style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
+                            <h6 class="feature-title" style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
                             <p class="grey-text">Hundreds of useful, scalable, vector icons at your disposal.</p>
                             <div style="height:15px"></div>
                         </div>
@@ -168,7 +168,7 @@
                             <i class="fas fa-check-circle fa-2x indigo-text"></i>
                         </div>
                         <div class="col-10">
-                            <h6 class="feature-title"style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
+                            <h6 class="feature-title" style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
                             <p class="grey-text">It doesn't matter whether your project will be displayed on desktop,
                                 laptop,
                                 tablet or mobile phone. MDB
@@ -196,7 +196,7 @@
                             <i class="fas fa-check-circle fa-2x indigo-text"></i>
                         </div>
                         <div class="col-10">
-                            <h6 class="feature-title"style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
+                            <h6 class="feature-title" style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
                             <p class="grey-text">Neat and easy to use animations, which will increase the interactivity
                                 of your
                                 project and delight your visitors.
@@ -212,7 +212,7 @@
                             <i class="fas fa-check-circle fa-2x indigo-text"></i>
                         </div>
                         <div class="col-10">
-                            <h6 class="feature-title"style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
+                            <h6 class="feature-title" style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
                             <p class="grey-text">Need inspiration? Use one of our predefined templates for free.</p>
                             <div style="height:15px"></div>
                         </div>
@@ -225,7 +225,7 @@
                             <i class="fas fa-check-circle fa-2x indigo-text"></i>
                         </div>
                         <div class="col-10">
-                            <h6 class="feature-title"style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
+                            <h6 class="feature-title" style="font-family: Sahel;font-weight:bold ">ویژگی</h6>
                             <p class="grey-text">5 minutes, a few clicks and... done. You will be surprised at how easy
                                 it is.
                             </p>
@@ -240,7 +240,7 @@
                             <i class="fas fa-check-circle fa-2x indigo-text"></i>
                         </div>
                         <div class="col-10">
-                            <h6 class="feature-title"style="font-family: Sahel;font-weight:bold ">ویژگی </h6>
+                            <h6 class="feature-title" style="font-family: Sahel;font-weight:bold ">ویژگی </h6>
                             <p class="grey-text">Using MDB is straightforward and pleasant. Components flexibility
                                 allows you deep
                                 customization. You will
@@ -276,7 +276,8 @@
                             <i class="fab fa-firefox fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2 pl-3">
-                            <h5 class="feature-title font-bold mb-1 wow jackInTheBox" style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1 wow jackInTheBox"
+                                style="font-family: Sahel;font-weight: bold;">چیز</h5>
                             <p class="grey-text mt-2">Chrome, Firefox, IE, Safari, Opera, Microsoft Edge - MDB loves all
                                 browsers;
                                 all browsers love MDB.
@@ -295,7 +296,8 @@
                             <i class="fas fa-level-up-alt fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2">
-                            <h5 class="feature-title font-bold mb-1"style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1" style="font-family: Sahel;font-weight: bold;">
+                                چیز</h5>
                             <p class="grey-text mt-2">MDB becomes better every month. We love the project and enhance as
                                 much as
                                 possible.
@@ -314,7 +316,8 @@
                             <i class="fas fa-comments fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2">
-                            <h5 class="feature-title font-bold mb-1"style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1" style="font-family: Sahel;font-weight: bold;">
+                                چیز</h5>
                             <p class="grey-text mt-2">Our society grows day by day. Visit our forum and check how it is
                                 to be a
                                 part of our family.
@@ -333,7 +336,8 @@
                             <i class="fas fa-code fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2">
-                            <h5 class="feature-title font-bold mb-1"style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1" style="font-family: Sahel;font-weight: bold;">
+                                چیز</h5>
                             <p class="grey-text mt-2">MDB is integrated with newest jQuery. Therefore you can use all
                                 the latest
                                 features which come along with
@@ -359,7 +363,8 @@
                             <i class="fas fa-cubes fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2">
-                            <h5 class="feature-title font-bold mb-1"style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1" style="font-family: Sahel;font-weight: bold;">
+                                چیز</h5>
                             <p class="grey-text mt-2">Material Design for Bootstrap comes with both, compiled, ready to
                                 use
                                 libraries including all features as
@@ -378,7 +383,8 @@
                             <i class="fas fa-question fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2">
-                            <h5 class="feature-title font-bold mb-1"style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1" style="font-family: Sahel;font-weight: bold;">
+                                چیز</h5>
                             <p class="grey-text mt-2">We care about reliability. If you have any questions - do not
                                 hesitate to
                                 contact us.
@@ -397,7 +403,8 @@
                             <i class="fas fa-th fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2">
-                            <h5 class="feature-title font-bold mb-1"style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1" style="font-family: Sahel;font-weight: bold;">
+                                چیز</h5>
                             <p class="grey-text mt-2">MDB fully supports Flex Box. You can forget about alignment
                                 issues.</p>
                         </div>
@@ -414,7 +421,8 @@
                             <i class="far fa-file-code fa-2x mb-1 indigo-text" aria-hidden="true"></i>
                         </div>
                         <div class="col-10 mb-2">
-                            <h5 class="feature-title font-bold mb-1"style="font-family: Sahel;font-weight: bold;">چیز</h5>
+                            <h5 class="feature-title font-bold mb-1" style="font-family: Sahel;font-weight: bold;">
+                                چیز</h5>
                             <p class="grey-text mt-2">Arranged and well documented .scss files can't wait until you
                                 compile them.</p>
                         </div>

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ManagerRequest;
 use App\Http\Requests\TeacherRequest;
 use App\Manager;
+use App\Role;
 use App\Teacher;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class TeacherController extends Controller
 {
@@ -31,7 +34,7 @@ class TeacherController extends Controller
     {
         $role = Auth::user()->userable->userable_type;
 
-        return view('admin.teacher-admin.add-teacher',compact('role'));
+        return view('admin.teacher-admin.add-teacher', compact('role'));
     }
 
     /**
@@ -40,16 +43,19 @@ class TeacherController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TeacherRequest $request)
+    public function store(ManagerRequest $request)
     {
         $data = $request->all();
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $id = $manager->id;
         $data['password'] = Hash::make($request['password']);
         $user = User::create($data);
         $userId = $user->id;
         $user = User::find($userId);
+        $role = Role::find(3);
+        $user->roles()->save($role);
         $manager->teacher()->create()->users()->save($user);
+        Session::flash('massage', 'معلم ساخته شد.');
         return redirect(route('teacher.show', compact('id')));
     }
 
@@ -61,7 +67,7 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teachers = Manager::find(1)->teacher()->get();
+        $teachers = Manager::find(Auth::user()->userable->userable_id)->teacher()->get();
         $num = 1;
         $role = Auth::user()->userable->userable_type;
         return view('admin.teacher-admin.index', compact('teachers', 'num', 'id', 'role'));
@@ -76,6 +82,7 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $teacherTemp = Teacher::find($id);
+
         return view('admin.teacher-admin.edit', compact('teacherTemp'));
     }
 
@@ -94,6 +101,7 @@ class TeacherController extends Controller
         foreach ($teacher->users as $user) {
             $user->update($data);
         }
+        Session::flash('massage', 'معلم ویرایش شد.');
         return redirect(route('teacher.show', $id));
 
     }
@@ -112,6 +120,8 @@ class TeacherController extends Controller
             $user->delete();
         }
         $teacher->delete();
+        Session::flash('massage', 'معلم حذف شد.');
+
         return redirect()->back();
 
     }

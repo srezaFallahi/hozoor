@@ -1,8 +1,4 @@
-@if($role=='App\Manager')
-    @extends('layouts.admin')
-@else
-    @extends('layouts.teacherAdmin')
-@endif
+@extends('layouts.admin')
 @section('content')
     <div class="card-header card-header-tabs  blue wow fadeInLeft">
 
@@ -71,8 +67,6 @@
                                 <td style="font-family: Sahel;font-weight: normal">{{$student->grade->name}}</td>
                                 <td style="font-family: Sahel;font-weight: normal">
                                 </td>
-                                <td>{{$attendance}}</td>
-
                             </tr>
                         @endforeach
                     @endforeach

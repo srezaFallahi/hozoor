@@ -27,11 +27,11 @@ class ManagerRequest extends FormRequest
             'first_name' => 'required|max:20|alpha',
             'last_name' => 'required|max:20|alpha',
             'password' => 'required|min:6|confirmed',
-            'email' => 'required',
-            'username' => 'required',
+            'email' => 'required|unique:users,email',
+            'username' => 'required|unique:users,username',
             'is_active' => 'nullable|boolean',
-            'code' => 'required',
-            'phone_number' => 'required',
+            'code' => 'required|max:10',
+            'phone_number' => 'required|max:11',
         ];
     }
 
@@ -46,8 +46,11 @@ class ManagerRequest extends FormRequest
             'last_name.alpha' => 'فقط از حروف الفبا استفاده کنید',
             'password.required' => 'رمز عبور  خود را وارد کنید',
             'password.confirmed' => 'رمز عبور با تکرار رمز عبور مطابقت ندارد ',
+            'password.min' => 'رمز عبور باید بیشتر از ۶ کارکتر باشد. ',
             'email.required' => 'ایمیل خود را وارد کنید',
+            'email.unique' => 'ایمیل قبلا وارد شده است',
             'username.required' => 'نام کاربری خود را وارد کنید',
+            'username.unique' => 'نام کاربری قبلا  توسط شخص دیگیری استفاده شده',
             'phone_number.required' => 'شماره خود را وارد کنید',
             'code.required' => 'شماره ملی خود را وارد کنید',
 

@@ -1,10 +1,6 @@
-@if($role=='App\Manager')
-    @extends('layouts.admin')
-@else
-    @extends('layouts.teacherAdmin')
-@endif
-
+@extends('layouts.admin')
 @section('content')
+
 
     <div class="card-header card-header-tabs deep-purple wow fadeInLeft">
 
@@ -109,14 +105,16 @@
         </div>
 
     </div>
+    @permission('teacher-controller')
     <div class="text-center wow fadeInRight">
         <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"
            data-target="#modalLoginForm45">اضافه</a>
     </div>
+    @endpermission
 
 @endsection
 @section('out-card')
-    <div class="modal fade" id="modalLoginForm45" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal fade" id="modalLoginForm45" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" dir="rtl"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

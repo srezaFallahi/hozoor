@@ -102,13 +102,13 @@ class AttendanceController extends Controller
         $absents = Student::find($request->attendanceFalseArray);
         if ($presents) {
             foreach ($presents as $student) {
-                $student->attendances()->create(['manager_id' => 1, 'attendance' => 1, 'date' => Carbon::now()->toDateString(), 'room_id' => $id]);
+                $student->attendances()->create(['manager_id' => Auth::user()->userable->userable_id, 'attendance' => 1, 'date' => Carbon::now()->toDateString(), 'room_id' => $id]);
             }
         }
         if ($absents) {
 
             foreach ($absents as $student) {
-                $student->attendances()->create(['manager_id' => 1, 'attendance' => 0, 'date' => now(), 'room_id' => $id]);
+                $student->attendances()->create(['manager_id' => Auth::user()->userable->userable_id, 'attendance' => 0, 'date' => now(), 'room_id' => $id]);
             }
         }
         return redirect()->back();

@@ -1,8 +1,4 @@
-@if($role=='App\Manager')
-    @extends('layouts.admin')
-@else
-    @extends('layouts.teacherAdmin')
-@endif
+@extends('layouts.admin')
 @section('content')
 
     <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>

@@ -1,9 +1,4 @@
-@if($role=='App\Manager')
-    @extends('layouts.admin')
-    @else
-    @extends('layouts.teacherAdmin')
-@endif
-
+@extends('layouts.admin')
 @section('content')
     <div class="card-header card-header-tabs deep-purple wow fadeInLeft">
 

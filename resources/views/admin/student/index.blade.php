@@ -1,8 +1,4 @@
-@if($role=='App\Manager')
-    @extends('layouts.admin')
-@else
-    @extends('layouts.teacherAdmin')
-@endif
+@extends('layouts.admin')
 
 @section('content')
     <div class="card-header card-header-tabs  blue wow fadeInLeft">
@@ -49,7 +45,6 @@
                             <td style="font-family: Sahel;font-weight: normal"><a
                                     href="{{route('student.edit',$student->id)}}"
                                     class="btn btn-1 btn-1b">
-
                                     ویرایش
                                     <i class="fas fa-user-edit"></i></a>
                             </td>

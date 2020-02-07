@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class RoomController extends Controller
@@ -50,11 +51,12 @@ class RoomController extends Controller
     {
         $data = $request->all();
         $days = Day::find($request->daysArray);
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $room = $manager->room()->create($data);
         foreach ($days as $day) {
             $room->days()->save($day);
         }
+        Session::flash('massage', 'کلاس شما ساخته شد:)');
         return redirect('/class/show');
     }
 
@@ -66,10 +68,20 @@ class RoomController extends Controller
      */
     public function show($id)
     {
+        $teach = null;
 
-        $manager = Manager::find(1);
+        if (Auth::user()->userable->userable_type == "App\Teacher") {
+            $teach = Teacher::find(Auth::user()->userable->userable_id);
+            $manager = Manager::find($teach->manager_id);
+            $classes = $teach->rooms()->get();
+        } else {
+            $manager = Manager::find(Auth::user()->userable->userable_id);
+            $classes = $manager->room()->get();
+        }
+
         $grades = $manager->grade()->get();
-        $classes = $manager->room()->get();
+
+
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
         $classes = $this->getPercent($classes);
@@ -91,7 +103,8 @@ class RoomController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         //
     }
@@ -103,11 +116,13 @@ class RoomController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoomEditRequest $request, $id)
+    public
+    function update(RoomEditRequest $request, $id)
     {
         $data = $request->all();
         $class = Room::find($id);
         $class->update($data);
+        Session::flash('massage', 'کلاس ویرایش شد:)');
         return redirect('/class/show');
 
     }
@@ -118,59 +133,70 @@ class RoomController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         $class = Room::find($id);
         $class->delete();
+        Session::flash('massage', 'کلاس حذف شد:)');
         return redirect('/class/show');
     }
 
-    public function addStudent(Request $request)
+    public
+    function addStudent(Request $request)
     {
         $studentId = $request->student_id;
         $roomId = $request->room_id;
         $student = Student::find($studentId);
         $room = Room::find($roomId);
         $room->students()->save($student);
+        Session::flash('massage', 'دانش آموز اضافه شد:)');
         return redirect('/class/show');
 
     }
 
-    public function showClassStudent(Request $request)
+    public
+    function showClassStudent(Request $request)
     {
         $class_id = $request->room_id;
         $class = Room::find($class_id);
         $students = $class->students()->get();
         $num = 1;
-        return view('admin.student.index', compact('students', 'num', 'class'));
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.student.index', compact('students', 'num', 'class', 'role'));
     }
 
-    public function gradeClass(Request $request)
+    public
+    function gradeClass(Request $request)
     {
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $id = $request->grade_id;
         $grade = $manager->grade()->where('id', '=', $id)->first();
         $classes = $grade->room()->get();
         $students = $grade->student()->get();
         $teachers = $manager->teacher()->get();
         $num = 1;
+        $role = Auth::user()->userable->userable_type;
 //        return $grade;
-        return view('admin.class.grade-index', compact('classes', 'grade', 'num', 'students', 'teachers'));
+        return view('admin.class.grade-index', compact('classes', 'grade', 'num', 'students', 'teachers', 'role'));
     }
 
-    public function teacherClass(Request $request)
+    public
+    function teacherClass(Request $request)
     {
         $id = $request->teacher_id;
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $teacher = $manager->teacher()->where('id', '=', $id)->first();
         $classes = $teacher->rooms()->get();
         $students = $manager->student()->get();
         $grades = $manager->grade()->get();
         $num = 1;
-        return view('admin.class.teacher-class', compact('classes', 'grades', 'num', 'students', 'teacher'));
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.class.teacher-class', compact('classes', 'grades', 'num', 'students', 'teacher', 'role'));
     }
 
-    public function getPercent($classes)
+    public
+    function getPercent($classes)
     {
 
         foreach ($classes as $class) {
@@ -179,9 +205,10 @@ class RoomController extends Controller
         return $classes;
     }
 
-    public static function classAttendancesPercent($class_id)
+    public
+    static function classAttendancesPercent($class_id)
     {
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $attendances = count($manager->attendance()->get()->where('room_id', '=', $class_id));
         $presents = count($manager->attendance()->get()->where('room_id', '=', $class_id)->where('attendance', '=', 1));
         if ($attendances != 0) {
@@ -192,7 +219,8 @@ class RoomController extends Controller
 
     }
 
-    public function getAverage($classes)
+    public
+    function getAverage($classes)
     {
         $average = 0;
         foreach ($classes as $class) {
@@ -204,28 +232,32 @@ class RoomController extends Controller
 
     }
 
-    public function gradeChart($grade_id)
+    public
+    function gradeChart($grade_id)
     {
         $grade = Grade::find($grade_id);
         $classes = $grade->room()->get();
         $classes = $this->getPercent($classes);
         $average = $this->getAverage($classes);
-
-        return view('admin.attendance.class-attendance-chart', compact('classes', 'average'));
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.attendance.class-attendance-chart', compact('classes', 'average', 'role'));
     }
 
-    public function dayChart($class_id)
+    public
+    function dayChart($class_id)
     {
-        $manger = Manager::find(1);
+        $manger = Manager::find(Auth::user()->userable->userable_id);
         $class = Room::find($class_id);
         $numStudent = count($class->students()->get());
         $dates = $manger->attendance()->select('date')->where('class_id', '=', $class_id)->distinct('date')->get();
         $attendances = $manger->attendance()->where('class_id', '=', $class_id);
         $dates = $this->getPercentOfDay($dates, $attendances, $numStudent);
-        return view('admin.attendance.day-chart', compact('dates'));
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.attendance.day-chart', compact('dates', 'role'));
     }
 
-    public function getPercentOfDay($dates, $attendances, $studentNum)
+    public
+    function getPercentOfDay($dates, $attendances, $studentNum)
     {
         foreach ($dates as $date) {
             $n = 0;
@@ -246,7 +278,8 @@ class RoomController extends Controller
         return $dates;
     }
 
-    public function checkDay1($classes, $tomorrow)
+    public
+    function checkDay1($classes, $tomorrow)
     {
         foreach ($classes as $class) {
             $temp = 0;
@@ -270,9 +303,10 @@ class RoomController extends Controller
 
     }
 
-    public function showAllAttendanceChart($id)
+    public
+    function showAllAttendanceChart($id)
     {
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $class = $manager->room()->where('id', '=', $id)->first();
         $dates = $class->attendance()->distinct()->get('date');
         $attendances = $class->attendance()->get();
@@ -293,20 +327,23 @@ class RoomController extends Controller
         }
         foreach ($dates as $date) {
             $d = Carbon::create($date->date);
-            $date['date'] = $d->subDays(31);
+            $date['date'] = $d->subDays(30);
             $date['date'] = date('Y,m,d', strtotime($date->date));
         }
 //        return $dates;
 //        return count($dates);
-        return view('admin.attendance.day-chart', compact('dates'));
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.attendance.day-chart', compact('dates', 'role'));
     }
 
-    public function viewDayChartIndex()
+    public
+    function viewDayChartIndex()
     {
 //        return 1;
-        $manager = Manager::find(1);
+        $manager = Manager::find(Auth::user()->userable->userable_id);
         $classes = $manager->room()->get();
-        return view('admin.class.charts-Index', compact('classes'));
+        $role = Auth::user()->userable->userable_type;
+        return view('admin.class.charts-Index', compact('classes', 'role'));
     }
 
 

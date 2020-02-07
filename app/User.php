@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -43,20 +44,21 @@ class User extends Authenticatable
         return $this->hasOne('App\userables');
     }
 
-    public function isManager()
+    public function hasPermission($permission)
     {
-        if ($this->userable->userable_type == 'App\Manager') {
-            return true;
-
+        $user = Auth::user();
+        foreach ($user->roles()->get() as $role) {
+            foreach ($role->permissions()->get() as $per) {
+                if ($per->name == $permission) {
+                    return true;
+                }
+            }
         }
         return false;
     }
 
-    public function isTeacher()
+    public function roles()
     {
-        if ($this->userable->userable_type == 'App\Teacher') {
-            return true;
-        }
-        return false;
+        return $this->belongsToMany('App\Role');
     }
 }
