@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+
 class ManagerController extends Controller
 {
     /**
@@ -20,6 +21,12 @@ class ManagerController extends Controller
      * @param $manager_id
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+
+        $this->middleware('adminPage:manager-controller', ['except' => ['store', 'create']]);
+    }
+
     public function index()
     {
 
@@ -28,7 +35,7 @@ class ManagerController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -99,4 +106,5 @@ class ManagerController extends Controller
     {
         //
     }
+
 }

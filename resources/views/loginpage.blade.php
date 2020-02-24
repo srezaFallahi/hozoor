@@ -38,8 +38,21 @@
                 <p class="button-text">ورود</p>
             </button>
 
+
         </div>
     </form>
+    {{--    <div class="login">--}}
+    <div class="form">
+        <form action="{{route('manager.create')}}" method="get">
+            @csrf
+            <button type="submit" class="button">
+                <div class="arrow-wrapper">
+                    <span class="arrow"></span>
+                </div>
+                <p class="button-text">ثبت نام مدیر</p>
+            </button>
+        </form>
+    </div>
     <div class="finished">
         <svg>
             <use href="#svg-check"/>
