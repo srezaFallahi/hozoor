@@ -209,8 +209,8 @@ class RoomController extends Controller
     static function classAttendancesPercent($class_id)
     {
         $manager = Manager::find(Auth::user()->userable->userable_id);
-        $attendances = count($manager->attendance()->get()->where('room_id', '=', $class_id));
-        $presents = count($manager->attendance()->get()->where('room_id', '=', $class_id)->where('attendance', '=', 1));
+        $attendances = count($manager->attendance()->get()->where('class_id', '=', $class_id));
+        $presents = count($manager->attendance()->get()->where('class_id', '=', $class_id)->where('attendance', '=', 1));
         if ($attendances != 0) {
             $percent = ($presents / $attendances) * 100;
             $percent = round($percent, 2);

@@ -59,5 +59,5 @@ Route::get('/test', function () {
     return Session::get('massage');
 
 });
-
+Route::get('/manager/show-all','AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
 

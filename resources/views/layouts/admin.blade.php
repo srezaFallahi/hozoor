@@ -171,6 +171,15 @@
                     <i class="fas fa-chalkboard"></i></a>
             </li>
             @endpermission
+            @permission('Manager-controller')
+
+            <li class="nav-item">
+                <a class="nav-link text-right" href="{{route('show-all-manager')}}">
+                     <span
+                         style="font-family: Sahel;font-weight: bold;"> مدیران </span>
+                    <i class="fas fa-chalkboard"></i></a>
+            </li>
+            @endpermission
             <!-- Divider -->
 
             <!-- Nav Item - Pages Collapse Menu -->
