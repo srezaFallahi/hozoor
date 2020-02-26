@@ -71,6 +71,7 @@ class TeacherController extends Controller
         $num = 1;
         $role = Auth::user()->userable->userable_type;
         return view('admin.teacher-admin.index', compact('teachers', 'num', 'id', 'role'));
+
     }
 
     /**
