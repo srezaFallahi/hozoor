@@ -78,13 +78,13 @@
                 <div class="sidebar-brand-icon rotate-n-15 ">
                     <i class="fas fa-laugh-wink animated bounce infinite"></i>
                 </div>
-                @permission('manager-controller')
-                <div class="sidebar-brand-text mx-3">پنل ادمین</div>
-                @endpermission
-                @permission('student-controller')
-                <div class="sidebar-brand-text mx-3">پنل مدیریت</div>
-                @endpermission
-            </a>>
+{{--                @permission('manager-controller')--}}
+                <div class="sidebar-brand-text mx-3">Be Happy </div>
+{{--                @endpermission--}}
+{{--                @permission('student-controller')--}}
+{{--                <div class="sidebar-brand-text mx-3">پنل مدیریت</div>--}}
+{{--                @endpermission--}}
+            </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
