@@ -106,9 +106,14 @@ class StudentController extends Controller
      */
     public function update($request, $id)
     {
-        $student = Student::find($id);
-        $student->update($request->all());
-        Session::flash('massage', 'دانش آموز ویرایش شد:)');
+//        $student = Student::find($id);
+//        $id = $student->manager_id;
+//        $data['password'] = Hash::make($request['password']);
+//        foreach ($student->users as $user) {
+//            $user->update($data);
+//        }
+//        $student->update($request->all());
+        Session::flash('massage', 'دانش آموز ویرایش نشد ارور داره بعدا ویرایشش باز میشهئ:)');
         return redirect('/student/show');
     }
 
