@@ -77,9 +77,9 @@ class StudentController extends Controller
         $manager = Manager::find(Auth::user()->userable->userable_id);
         $students = $manager->student()->get();
         $num = 1;
-        $role = Auth::user()->userable->userable_type;
-
-        return view('admin.student.index', compact('students', 'num', 'role'));
+//        $role = Auth::user()->userable->userable_type;
+//        return '1';
+        return view('admin.student.index', compact('students', 'num', 'id'));
 
     }
 

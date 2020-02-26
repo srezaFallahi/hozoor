@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Manager extends Model
 {
@@ -46,5 +47,19 @@ class Manager extends Model
         return $this->hasMany('App\Attendance');
     }
 
+    public static function findManager(){
+        if (Auth::user()->userable->userable_type == 'App\Manager') {
+            $manger = Manager::find(Auth::user()->userable->userable_id);
+            return $manger;
+        } elseif (Auth::user()->userable->userable_type == 'App\Student') {
+            $student = Student::find(Auth::user()->userable->userable_id);
+            $manger = Manager::find($student->manager_id);
+            return $manger;
+        } elseif (Auth::user()->userable->userable_type == 'App\Teacher') {
+            $teacher1 = Teacher::find(Auth::user()->userable->userable_id);
+            $manger = Manager::find($teacher1->manager_id);
+            return $manger;
+        }
+    }
 
 }

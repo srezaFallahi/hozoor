@@ -98,6 +98,7 @@ class TeacherController extends Controller
         $data = $request->all();
         $teacher = Teacher::find($id);
         $id = $teacher->manager_id;
+        $data['password'] = Hash::make($request['password']);
         foreach ($teacher->users as $user) {
             $user->update($data);
         }

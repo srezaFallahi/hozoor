@@ -185,7 +185,7 @@ class RoomController extends Controller
     function teacherClass(Request $request)
     {
         $id = $request->teacher_id;
-        $manager = Manager::find(Auth::user()->userable->userable_id);
+        $manager = Manager::findManager();
         $teacher = $manager->teacher()->where('id', '=', $id)->first();
         $classes = $teacher->rooms()->get();
         $students = $manager->student()->get();
@@ -208,9 +208,9 @@ class RoomController extends Controller
     public
     static function classAttendancesPercent($class_id)
     {
-        $manager = Manager::find(Auth::user()->userable->userable_id);
-        $attendances = count($manager->attendance()->get()->where('class_id', '=', $class_id));
-        $presents = count($manager->attendance()->get()->where('class_id', '=', $class_id)->where('attendance', '=', 1));
+        $manager = Manager::findManager();
+        $attendances = count($manager->attendance()->get()->where('room_id', '=', $class_id));
+        $presents = count($manager->attendance()->get()->where('room_id', '=', $class_id)->where('attendance', '=', 1));
         if ($attendances != 0) {
             $percent = ($presents / $attendances) * 100;
             $percent = round($percent, 2);
@@ -227,7 +227,9 @@ class RoomController extends Controller
             $average = $average + $class->percent;
         }
         $num = count($classes);
-        $average = $average / $num;
+        if ($num > 0) {
+            $average = $average / $num;
+        } else $average = 0;
         return $average;
 
     }
@@ -243,17 +245,17 @@ class RoomController extends Controller
         return view('admin.attendance.class-attendance-chart', compact('classes', 'average', 'role'));
     }
 
-    public
-    function dayChart($class_id)
+    public function dayChart($class_id)
     {
-        $manger = Manager::find(Auth::user()->userable->userable_id);
+        $manager = Manager::findManager();
         $class = Room::find($class_id);
         $numStudent = count($class->students()->get());
-        $dates = $manger->attendance()->select('date')->where('class_id', '=', $class_id)->distinct('date')->get();
-        $attendances = $manger->attendance()->where('class_id', '=', $class_id);
+        $dates = $manager->attendance()->select('date')->where('room_id', '=', $class_id)->distinct('date')->get();
+        $attendances = $manager->attendance()->where('room_id', '=', $class_id);
         $dates = $this->getPercentOfDay($dates, $attendances, $numStudent);
         $role = Auth::user()->userable->userable_type;
         return view('admin.attendance.day-chart', compact('dates', 'role'));
+
     }
 
     public
@@ -306,11 +308,13 @@ class RoomController extends Controller
     public
     function showAllAttendanceChart($id)
     {
-        $manager = Manager::find(Auth::user()->userable->userable_id);
+        $manager = Manager::findManager();
         $class = $manager->room()->where('id', '=', $id)->first();
         $dates = $class->attendance()->distinct()->get('date');
         $attendances = $class->attendance()->get();
-        $classStudentNum = count($attendances) / count($dates);
+        if (count($dates) > 0) {
+            $classStudentNum = count($attendances) / count($dates);
+        } else $classStudentNum = 0;
         foreach ($dates as $date) {
             $temp = 0;
 
@@ -321,8 +325,10 @@ class RoomController extends Controller
                     }
                 }
             }
+//            if ($classStudentNum > 0) {
             $percent = ($temp / $classStudentNum) * 100;
-
+//             else
+//                $percent = 0;
             $date['percent'] = $percent;
         }
         foreach ($dates as $date) {
@@ -340,7 +346,7 @@ class RoomController extends Controller
     function viewDayChartIndex()
     {
 //        return 1;
-        $manager = Manager::find(Auth::user()->userable->userable_id);
+        $manager = Manager::findManager();
         $classes = $manager->room()->get();
         $role = Auth::user()->userable->userable_type;
         return view('admin.class.charts-Index', compact('classes', 'role'));

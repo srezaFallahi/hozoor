@@ -44,7 +44,7 @@ Route::post('/class/add', 'RoomController@addStudent')->name('add-student')->mid
 Route::post('/class/showStudent', 'RoomController@showClassStudent')->name('show-student')->middleware('adminPage:room-controller');
 Route::post('/showAttendance/{student_id}', 'AttendanceController@showStudentAttendance')->middleware('adminPage:attendance-controller');
 Route::post('/showAttendance/{student_id}', 'AttendanceController@showStudentAttendance')->middleware('adminPage:attendance-controller');
-Route::get('/class/dayChart/{id}', 'RoomController@showAllAttendanceChart')->name('dayChart')->middleware('adminPage:room-controller');
+Route::get('/class/Chart/{id}', 'RoomController@showAllAttendanceChart')->name('dayChart')->middleware('adminPage:room-controller');
 Route::post('/attendance/{id}', 'AttendanceController@multiAdd')->name('doAttendance')->middleware('adminPage:attendance-controller');
 Route::post('/class/grade-class', 'RoomController@gradeClass')->name('grade-class')->middleware('adminPage:room-controller');
 Route::post('/class/teacher-class', 'RoomController@teacherClass')->name('teacher-class')->middleware('adminPage:room-controller');
@@ -52,12 +52,6 @@ Route::get('/class/dayIndex/{id}', 'RoomController@viewDayChartIndex')->name('da
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/test', function () {
-
-    Session::flash('massage', 'pashmak');
-
-    return Session::get('massage');
-
-});
-Route::get('/manager/show-all','AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
+//Route::get('/test', 'RoomController@dayChart');
+Route::get('/manager/show-all', 'AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
 
