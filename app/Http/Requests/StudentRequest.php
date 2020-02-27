@@ -24,9 +24,12 @@ class StudentRequest extends FormRequest
     public function rules()
     {
         return [
+            'first_name' => 'required|max:20|alpha',
+            'last_name' => 'required|max:20|alpha',
+//            'password' => 'required|min:6|confirmed',
+//            'email' => 'required',
+//            'username' => 'required',
             'grade_id' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
             'dad_name' => 'required',
             'code' => 'required',
             'birth_day' => 'required',

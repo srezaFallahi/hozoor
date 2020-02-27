@@ -25,8 +25,10 @@
                     <th style="font-family: Sahel;font-weight: bolder">تاریخ تولد</th>
                     <th style="font-family: Sahel;font-weight: bolder">تاریخ ورود</th>
                     <th style="font-family: Sahel;font-weight: bolder">مقطع</th>
+                    @permission('teacher-controller')
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
+                    @endpermission
                 </tr>
                 </thead>
                 <tbody>
@@ -42,6 +44,8 @@
                             <td style="font-family: Sahel;font-weight: normal">{{$student->birth_day}}</td>
                             <td style="font-family: Sahel;font-weight: normal">{{$student->entry_date}}</td>
                             <td style="font-family: Sahel;font-weight: normal">{{$student->grade->name}}</td>
+                            @permission('teacher-controller')
+
                             <td style="font-family: Sahel;font-weight: normal"><a
                                     href="{{route('student.edit',$student->id)}}"
                                     class="btn btn-1 btn-1b">
@@ -57,15 +61,16 @@
                                         <span>حذف</span></button>
                                 </form>
                             </td>
+                            @endpermission
                             {{-- agar dast bezani behesh error offset mide}}
 {{--                            <td>--}}
-{{--                                <form action="{{route('oneStudentAttendance',$student->id)}}" method="post">--}}
-{{--                                    @csrf--}}
-{{--                                    --}}{{--                                    <input type="hidden" name="class_id" value="{{$class->id}}">--}}
-{{--                                    <input class="btn btn-info" value="وضعیت حضور و غیاب" type="submit">--}}
-{{--                                </form>--}}
+                            {{--                                <form action="{{route('oneStudentAttendance',$student->id)}}" method="post">--}}
+                            {{--                                    @csrf--}}
+                            {{--                                    --}}{{--                                    <input type="hidden" name="class_id" value="{{$class->id}}">--}}
+                            {{--                                    <input class="btn btn-info" value="وضعیت حضور و غیاب" type="submit">--}}
+                            {{--                                </form>--}}
 
-{{--                            </td>--}}
+                            {{--                            </td>--}}
                         </tr>
                     @endforeach
                 @endforeach

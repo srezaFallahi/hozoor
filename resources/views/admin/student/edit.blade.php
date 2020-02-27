@@ -24,12 +24,15 @@
                     <div class=" form-group">
                         <label class=" col-12 text-right"
                                style="font-family: Sahel;font-weight: bold;color: black">نام</label>
-                        <input type="text" class="form-control @error('first_name') is-invalid @enderror"
-                               name="first_name" value="{{$student->first_name}}">
-                        @error('first_name')
-                        <div class="alert alert-danger text-right"
-                             style="font-family: Sahel;font-weight: normal">{{$message}}</div>
-                        @enderror
+                        @foreach($users as $user)
+
+                            <input type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                   name="first_name" value="{{$user->first_name}}">
+                            @error('first_name')
+                            <div class="alert alert-danger text-right"
+                                 style="font-family: Sahel;font-weight: normal">{{$message}}</div>
+                            @enderror
+                        @endforeach
                     </div>
                 </div>
                 <!-- Grid column -->
@@ -39,13 +42,14 @@
                         <label for="input-char-counter" class=" col-12 text-right"
                                style="font-family: Sahel;font-weight: bold;color: black"> نام
                             خانوادگی </label>
-                        <input type="text" class="form-control @error('last_name') is-invalid @enderror"
-                               id="input-char-counter" name="last_name" value="{{$student->last_name}}"
-                        >
-                        @error('last_name')
-                        <div class="alert alert-danger text-right"
-                             style="font-family: Sahel;font-weight: normal">{{$message}}</div>
-                        @enderror
+                        @foreach($users as $user)
+                            <input type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                   id="input-char-counter" name="last_name" value="{{$user->last_name}}">
+                            @error('last_name')
+                            <div class="alert alert-danger text-right"
+                                 style="font-family: Sahel;font-weight: normal">{{$message}}</div>
+                            @enderror
+                        @endforeach
 
 
                     </div>
@@ -62,12 +66,14 @@
                     <div class=" form-group">
                         <label for="inputAddressMD" class=" col-12 text-right"
                                style="font-family: Sahel;font-weight: bold;color: black">شماره ملی</label>
-                        <input type="text" class="form-control @error('personal_code') is-invalid @enderror"
-                               id="inputAddressMD" name="personal_code" value="{{$student->personal_code}}">
-                        @error('password')
-                        <div class="alert alert-danger text-right"
-                             style="font-family: Sahel;font-weight: normal">{{$message}}</div>
-                        @enderror
+                        @foreach($users as $user)
+                            <input type="text" class="form-control @error('code') is-invalid @enderror"
+                                   id="inputAddressMD" name="code" value="{{$user->code}}">
+                            @error('code')
+                            <div class="alert alert-danger text-right"
+                                 style="font-family: Sahel;font-weight: normal">{{$message}}</div>
+                            @enderror
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -76,7 +82,7 @@
                         <label for="inputAddressMD" class=" col-12 text-right"
                                style="font-family: Sahel;font-weight: bold;color: black">مقطع</label>
                         <select class="browser-default custom-select" name="grade_id">
-                            <option selected>مقطع</option>
+                            <option value="{{$student->grade_id}}" selected>{{$student_grade->name}}</option>
                             @foreach($grades as $grade)
                                 <option value="{{$grade->id}}">{{$grade->name}}</option>
                             @endforeach
@@ -113,8 +119,9 @@
                                style="font-family: Sahel;font-weight: bold;color: black"> تاریخ ورود</label>
 
                         <input type="text"
-                               class="form-control @error('entry_date') is-invalid @enderror observer-example"
-                               id="inputAddress2MD" name="entry_date" value="{{$student->entry_date}}"
+                               class="form-control @error('entry_date') is-invalid @enderror formatter-example"
+                               id="inputAddress2MD" name="entry_date"
+                               value="{{$student->entry_date}}"
                         >
                         @error('entry_date')
                         <div class="alert alert-danger text-right"
@@ -129,8 +136,9 @@
                                style="font-family: Sahel;font-weight: bold;color: black"> تاریخ تولد</label>
 
                         <input type="text"
-                               class="form-control @error('birth_day') is-invalid @enderror  observer-example"
-                               id="inputAddress2MD" name="birth_day" value="{{$student->birth_day}}"
+                               class="form-control @error('birth_day') is-invalid @enderror  formatter-example"
+                               id="inputAddress2MD" name="birth_day"
+                               value="{{$student->birth_day}}"
                         >
                         @error('birth_day')
                         <div class="alert alert-danger text-right"
@@ -141,10 +149,10 @@
 
                 <!-- Grid column -->
             </div>
-            <!-- Grid row -->
-            {{--            <input type="submit" class="btn btn-outline-warning"--}}
-            {{--                   style="font-family: Sahel;font-weight: bolder;"--}}
-            {{--                   value="انصراف">--}}
+            {{--            <!-- Grid row -->--}}
+            {{--                        <input type="submit" class="btn btn-outline-warning"--}}
+            {{--                               style="font-family: Sahel;font-weight: bolder;"--}}
+            {{--                               value="انصراف">--}}
             <input type="submit" class=" btn btn-6 btn-6f"
                    style="font-family: Sahel;font-weight: bolder; color: white"
                    value="ویرایش">

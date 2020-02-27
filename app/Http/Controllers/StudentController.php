@@ -79,7 +79,7 @@ class StudentController extends Controller
         $num = 1;
 //        $role = Auth::user()->userable->userable_type;
 //        return '1';
-        return view('admin.student.index', compact('students', 'num', 'id'));
+        return view('admin.student.index', compact('students', 'num'));
 
     }
 
@@ -92,9 +92,11 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = Student::find($id);
+        $users = $student->users()->get();
         $grades = Grade::all()->where('manager_id', '=', Auth::user()->userable->userable_id);
+        $student_grade = Grade::find($student->grade_id);
         $role = Auth::user()->userable->userable_type;
-        return view('admin.student.edit', compact('student', 'grades', 'role'));
+        return view('admin.student.edit', compact('student', 'grades', 'users', 'role', 'id', 'student_grade'));
     }
 
     /**
@@ -104,16 +106,20 @@ class StudentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update($request, $id)
+    public function update(StudentRequest $request, $id)
     {
-//        $student = Student::find($id);
+        $user_data = $request->all('first_name', 'last_name', 'code');
+        $student_data = $request->all('entry_date', 'birth_day', 'dad_name', 'grade_id');
+        $student = Student::find($id);
+//        return var_dump($student_data);
+
 //        $id = $student->manager_id;
 //        $data['password'] = Hash::make($request['password']);
-//        foreach ($student->users as $user) {
-//            $user->update($data);
-//        }
-//        $student->update($request->all());
-        Session::flash('massage', 'دانش آموز ویرایش نشد ارور داره بعدا ویرایشش باز میشهئ:)');
+        foreach ($student->users as $user) {
+            $user->update($user_data);
+        }
+        $student->update($student_data);
+        Session::flash('massage', 'دانش آموز ویرایش شد.:)');
         return redirect('/student/show');
     }
 
@@ -123,7 +129,8 @@ class StudentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         $student = Student::find($id);
         $student->delete();
