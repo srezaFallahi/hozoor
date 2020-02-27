@@ -24,6 +24,7 @@
                         <th style="font-family: Sahel;font-weight: bolder">حاضر</th>
                         {{--                        <th style="font-family: Sahel;font-weight: bolder">غایب</th>--}}
                         <th style="font-family: Sahel;font-weight: bolder">نام</th>
+
                         <th style="font-family: Sahel;font-weight: bolder">نام خانوادگی</th>
                         <th style="font-family: Sahel;font-weight: bolder">نام پدر</th>
                         <th style="font-family: Sahel;font-weight: bolder">شماره ملی</th>
