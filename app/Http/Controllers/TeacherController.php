@@ -43,7 +43,7 @@ class TeacherController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ManagerRequest $request)
+    public function store(TeacherRequest $request)
     {
         $data = $request->all();
         $manager = Manager::find(Auth::user()->userable->userable_id);

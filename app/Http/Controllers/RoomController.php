@@ -87,10 +87,13 @@ class RoomController extends Controller
 //        return $tomorrow;
         $classes = $this->checkDay1($classes, $tomorrow);
         $role = Auth::user()->userable->userable_type;
-
+        return $tomorrow;
+//        foreach ($classes as $class) {
+//            echo $class->day1;
+//        }
 //        return $classes;
-        $num = 1;
-        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students', 'role'));
+//        $num = 1;
+//        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students', 'role'));
 
     }
 

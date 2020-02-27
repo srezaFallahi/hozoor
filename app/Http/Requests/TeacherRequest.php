@@ -26,10 +26,12 @@ class TeacherRequest extends FormRequest
         return [
             'first_name' => 'required|max:20|alpha',
             'last_name' => 'required|max:20|alpha',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6|confirmed|max:25',
             'email' => 'required',
             'username' => 'required',
-            'is_active' => 'nullable|boolean'
+            'is_active' => 'nullable|boolean',
+            'code' => 'required|max:10',
+            'phone_number' => 'required|max:11',
         ];
     }
 
@@ -45,7 +47,12 @@ class TeacherRequest extends FormRequest
             'password.required' => 'رمز عبور  معلم را وارد کنید',
             'password.confirmed' => 'رمز عبور با تکرار رمز عبور مطابقت ندارد ',
             'email.required' => 'ایمیل معلم را وارد کنید',
-            'username.required' => 'نام کاربری معلم را وارد کنید'
+            'username.required' => 'نام کاربری معلم را وارد کنید',
+            'code.max' => 'کد ملی باید ۱۰ رقم باشد.',
+            'code.required' => 'کد ملی را وارد کنید.',
+            'phone_number.required' => 'شماره موبایل را وارد کنید.',
+            'phone_number.max' => 'شماره موبایل ۱۱ رقم باید باشد.',
+            'password.max' => 'رمز عبور کمتر از ۲۵ حرف باید باشد.'
 
         ];
     }
