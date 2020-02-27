@@ -78,10 +78,7 @@ class RoomController extends Controller
             $manager = Manager::find(Auth::user()->userable->userable_id);
             $classes = $manager->room()->get();
         }
-
         $grades = $manager->grade()->get();
-
-
         $teachers = $manager->teacher()->get();
         $students = $manager->student()->get();
         $classes = $this->getPercent($classes);
@@ -359,5 +356,5 @@ class RoomController extends Controller
 //        $dates = $this->getPercentEverySection($id);
 //        return $dates;
 //    }
-
 }
+

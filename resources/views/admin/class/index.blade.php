@@ -22,6 +22,7 @@
                     <th style="font-family: Sahel;font-weight: bolder">نام کلاس</th>
                     <th style="font-family: Sahel;font-weight: bolder">نام استاد</th>
                     <th style="font-family: Sahel;font-weight: bolder">مقطع</th>
+                    <th style="font-family: Sahel;font-weight: bolder">روز ها</th>
                     <th style="font-family: Sahel;font-weight: bolder">اضافه کردن دانش آموز</th>
                     <th style="font-family: Sahel;font-weight: bolder">اعضا کلاس</th>
                     <th style="font-family: Sahel;font-weight: bolder">حضور و غیاب</th>
@@ -40,6 +41,12 @@
                         @foreach($class->teacher->users as $user)
                             <td style="font-family: Sahel;font-weight: normal">{{$user->first_name}} {{$user->last_name}}</td>
                         @endforeach
+                        <td style="font-family: Sahel;font-weight: normal" class="col-lg-3">
+                            @foreach($class->days as $day)
+                                {{$day->name." و "}}
+                                <br>
+
+                            @endforeach</td>
                         <td style="font-family: Sahel;font-weight: normal">{{$class->grade->name}}</td>
                         <td style="font-family: Sahel;font-weight: normal">
 
