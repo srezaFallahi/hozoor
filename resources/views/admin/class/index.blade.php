@@ -185,40 +185,40 @@
                         <div class="row text-right">
                             <div class="col-3">
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="1"> شنبه</lable>
-                                <input type="checkbox" value="0" name="daysArray[]" id="0">
+                                <input type="checkbox" value="0" name="daysArray[]" id="1">
                             </div>
                             <div class="col-3">
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="2"> یکشنبه</lable>
-                                <input type="checkbox" value="1" name="daysArray[]" id="1">
+                                <input type="checkbox" value="1" name="daysArray[]" id="2">
                             </div>
                             <div class="col-3">
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="3"> دوشنبه</lable>
-                                <input type="checkbox" value="2" name="daysArray[]" id="2">
+                                <input type="checkbox" value="2" name="daysArray[]" id="3">
                             </div>
                             <div class="col-3">
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="4"> سه شنبه
                                 </lable>
-                                <input type="checkbox" value="3" name="daysArray[]" id="3">
+                                <input type="checkbox" value="3" name="daysArray[]" id="4">
                             </div>
                             <div class="col-3">
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="5"> چهارشنبه
                                 </lable>
-                                <input type="checkbox" value="4" name="daysArray[]" id="4">
+                                <input type="checkbox" value="4" name="daysArray[]" id="5">
                             </div>
                             <div class="col-3">
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="6"> پنج شنبه
                                 </lable>
-                                <input type="checkbox" value="5" name="daysArray[]" id="5">
+                                <input type="checkbox" value="5" name="daysArray[]" id="6">
                             </div>
                             <div class="col-3">
 
                                 <lable style="font-family: Sahel;font-weight: bold;color: black" for="7"> جمعه</lable>
-                                <input type="checkbox" value="6" name="daysArray[]" id="6">
+                                <input type="checkbox" value="6" name="daysArray[]" id="7">
                             </div>
                         </div>
                     </div>
