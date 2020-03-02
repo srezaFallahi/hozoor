@@ -91,7 +91,7 @@ class RoomController extends Controller
         foreach ($classes as $class) {
             echo $class->day1;
         }
-        return $classes;
+//        return $classes;
         $num = 1;
         return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students', 'role'));
 
