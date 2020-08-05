@@ -41,6 +41,8 @@
                         @foreach($class->teacher->users as $user)
                             <td style="font-family: Sahel;font-weight: normal">{{$user->first_name}} {{$user->last_name}}</td>
                         @endforeach
+
+                        <td style="font-family: Sahel;font-weight: normal">{{$class->grade->name}}</td>
                         <td style="font-family: Sahel;font-weight: normal" class="col-lg-3">
                             <select value="1">
 
@@ -52,7 +54,6 @@
                                 @endforeach
                             </select>
                         </td>
-                        <td style="font-family: Sahel;font-weight: normal">{{$class->grade->name}}</td>
                         <td style="font-family: Sahel;font-weight: normal">
 
                             <div class="text-center">
@@ -255,12 +256,26 @@
                                        class="col-12 text-right text-dark"> <i class="fas fa-graduation-cap"></i>
                                     نام کلاس</label>
 
-                                <input type="text" id="defaultForm-email" name="name" class="form-control validate">
+                                <input type="text" id="defaultForm-email" name="name" class="form-control validate" value="{{$class->name}}">
                                 @error('name')
                                 <div class="alert alert-danger text-right"
                                      style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                                 @enderror
                             </div>
+                        </div>
+                        <div class=" form-group">
+                            <label for="inputAddressMD" class=" col-12 text-right"
+                                   style="font-family: Sahel;font-weight: bold;color: black">مقطع</label>
+                            <select class="browser-default custom-select" name="grade_id">
+                                <option selected>مقطع</option>
+                                @foreach($grades as $grade)
+                                    <option value="{{$grade->id}}">{{$grade->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('grade_id')
+                            <div class="alert alert-danger text-right"
+                                 style="font-family: Sahel;font-weight: normal">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
                             <input type="submit" name="update" class="btn btn-default" value="ویرایش">
