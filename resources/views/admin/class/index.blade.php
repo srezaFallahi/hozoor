@@ -262,8 +262,8 @@
                                      style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                                 @enderror
                             </div>
-                        </div>
-                        <div class=" form-group">
+
+{{--                        <div class=" form-group">--}}
                             <label for="inputAddressMD" class=" col-12 text-right"
                                    style="font-family: Sahel;font-weight: bold;color: black">مقطع</label>
                             <select class="browser-default custom-select" name="grade_id">
