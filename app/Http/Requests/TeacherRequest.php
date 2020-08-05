@@ -29,7 +29,7 @@ class TeacherRequest extends FormRequest
             'password' => 'required|min:6|confirmed|max:25',
             'email' => 'required',
             'username' => 'required',
-            'is_active' => 'nullable|boolean',
+            'is_active' => 'nullable',
             'code' => 'required|max:10',
             'phone_number' => 'required|max:11',
         ];

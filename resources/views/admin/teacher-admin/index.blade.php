@@ -24,7 +24,7 @@
                     <th style="font-family: Sahel;font-weight: bolder">یوزرنیم</th>
                     <th style="font-family: Sahel;font-weight: bolder">ایمیل</th>
                     <th style="font-family: Sahel;font-weight: bolder">کلاس ها</th>
-{{--                    <th style="font-family: Sahel;font-weight: bolder">پسوورد</th>--}}
+                    {{--                    <th style="font-family: Sahel;font-weight: bolder">پسوورد</th>--}}
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
                 </tr>
@@ -37,7 +37,8 @@
                             <td style="font-family:Sahel;;font-weight: normal">{{$num++}}</td>
                             <td style="font-family: Sahel;font-weight: normal">{{$teacher->first_name}}</td>
                             <td style="font-family: Sahel;font-weight: normal">{{$teacher->last_name}}</td>
-                            <td>@if($teacher->is_active==1)
+                            <td>
+                                @if($teacher->is_active==1)
                                     <form action="{{route('teacher.update',$teacherTemp->id)}}" method="post">
                                         @csrf
                                         @method('PATCH')
