@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
@@ -163,7 +164,7 @@ class RoomController extends Controller
         $students = $class->students()->get();
         $num = 1;
         $role = Auth::user()->userable->userable_type;
-        return view('admin.student.index', compact('students', 'num', 'class', 'role'));
+        return view('admin.class.student-show', compact('students', 'num', 'class', 'role', 'class_id'));
     }
 
     public
@@ -357,7 +358,7 @@ class RoomController extends Controller
     {
         $studentsId = $request->studentsId;
         $roomId = $request->class_id;
-        $students= Student::find($studentsId);
+        $students = Student::find($studentsId);
         $room = Room::find($roomId);
 
         foreach ($students as $student) {
@@ -371,12 +372,23 @@ class RoomController extends Controller
 
     function showMultiAddStudentPage(Request $request)
     {
-        $class_id=$request->class_id;
+        $class_id = $request->class_id;
         $manager = Manager::find(Auth::user()->userable->userable_id);
         $students = $manager->student()->get();
         $num = 1;
-        return view('admin.class.multi-add-student', compact('students', 'num','class_id'));
+        return view('admin.class.multi-add-student', compact('students', 'num', 'class_id'));
 
+
+    }
+
+    public function multiRemoveFromClass(Request $request)
+    {
+        $students_id = $request->studentsId;
+        $room_id = $request->class_id;
+        foreach ($students_id as $student) {
+            DB::table('room_student')->where('room_id', $room_id)->where('student_id', $student)->delete();
+        }
+        return redirect('/class/show');
 
     }
 
@@ -386,5 +398,6 @@ class RoomController extends Controller
 //        $dates = $this->getPercentEverySection($id);
 //        return $dates;
 //    }
+
 }
 

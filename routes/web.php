@@ -51,9 +51,15 @@ Route::post('/attendance/{id}', 'AttendanceController@multiAdd')->name('doAttend
 Route::post('/class/grade-class', 'RoomController@gradeClass')->name('grade-class')->middleware('adminPage:room-controller');
 Route::post('/class/teacher-class', 'RoomController@teacherClass')->name('teacher-class')->middleware('adminPage:room-controller');
 Route::get('/class/dayIndex/{id}', 'RoomController@viewDayChartIndex')->name('dayIndex')->middleware('adminPage:room-controller');
+Route::post('/class/multiDelete', 'RoomController@multiRemoveFromClass')->name('multiDelete')->middleware('adminPage:room-controller');
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 
-//Route::get('/test', 'RoomController@dayChart');
 Route::get('/manager/show-all', 'AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
 
+Route::get('/test',function (){
+
+//    $room_id=find(['5','18','13']);
+
+
+} );
