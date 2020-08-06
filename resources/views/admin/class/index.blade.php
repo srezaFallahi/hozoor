@@ -56,14 +56,22 @@
                         </td>
                         <td style="font-family: Sahel;font-weight: normal">
 
-                            <div class="text-center">
-                                <button type="submit"
-                                        class="btn btn-primary btn-rounded mb-4 col-sm-12"
-                                        data-toggle="modal"
-                                        data-target="#class-{{$class->id}}">
-                                    اضافه کن
-                                </button>
-                            </div>
+                            <form action="{{route('multiStudentAddShow')}}" method="post">
+                                @csrf
+                                <input type="hidden" value="{{$class->id}}" name="class_id">
+                                <input type="submit"
+                                       class="btn btn-primary btn-rounded mb-4 col-sm-12" value="اضافه کردن">
+
+                            </form>
+
+                            {{--                            <div class="text-center">--}}
+                            {{--                                <button type="submit"--}}
+                            {{--                                        class="btn btn-primary btn-rounded mb-4 col-sm-12"--}}
+                            {{--                                        data-toggle="modal"--}}
+                            {{--                                        data-target="#class-{{$class->id}}">--}}
+                            {{--                                    اضافه کن--}}
+                            {{--                                </button>--}}
+                            {{--                            </div>--}}
                         </td>
                         <td style="font-family: Sahel;font-weight: normal">
                             <form action="{{route('show-student')}}" method="post">
@@ -256,14 +264,15 @@
                                        class="col-12 text-right text-dark"> <i class="fas fa-graduation-cap"></i>
                                     نام کلاس</label>
 
-                                <input type="text" id="defaultForm-email" name="name" class="form-control validate" value="{{$class->name}}">
+                                <input type="text" id="defaultForm-email" name="name" class="form-control validate"
+                                       value="{{$class->name}}">
                                 @error('name')
                                 <div class="alert alert-danger text-right"
                                      style="font-family: Sahel;font-weight: normal">{{$message}}</div>
                                 @enderror
                             </div>
 
-{{--                        <div class=" form-group">--}}
+                            {{--                        <div class=" form-group">--}}
                             <label for="inputAddressMD" class=" col-12 text-right"
                                    style="font-family: Sahel;font-weight: bold;color: black">مقطع</label>
                             <select class="browser-default custom-select" name="grade_id">

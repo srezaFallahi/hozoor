@@ -37,6 +37,8 @@ Route::get('/er', function () {
 Route::resource('/student', 'StudentController')->middleware('adminPage:student-controller');
 Route::resource('/attendance', 'AttendanceController')->middleware('adminPage:attendance-controller');
 Route::resource('/class', 'RoomController')->middleware('adminPage:room-controller');
+Route::post('/class/multiAddStudentShow', 'RoomController@showMultiAddStudentPage')->name('multiStudentAddShow')->middleware('adminPage:room-controller');
+Route::post('/class/multiAddStudent', 'RoomController@addMultiStudent')->name('multiStudentAdd')->middleware('adminPage:room-controller');
 Route::get('/admin', function () {
     return view('layouts.admin');
 })->middleware('adminPage:student-controller');;

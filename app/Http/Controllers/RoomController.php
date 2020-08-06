@@ -56,7 +56,7 @@ class RoomController extends Controller
         foreach ($days as $day) {
             $room->days()->save($day);
         }
-        Session::flash('massage', 'کلاس شما ساخته شد:)');
+        Session::flash('massage', 'کلاس شما ساخته شد.');
         return redirect('/class/show');
     }
 
@@ -352,6 +352,33 @@ class RoomController extends Controller
         return view('admin.class.charts-Index', compact('classes', 'role'));
     }
 
+
+    function addMultiStudent(Request $request)
+    {
+        $studentsId = $request->studentsId;
+        $roomId = $request->class_id;
+        $students= Student::find($studentsId);
+        $room = Room::find($roomId);
+
+        foreach ($students as $student) {
+            $room->students()->save($student);
+        }
+        Session::flash('massage', 'دانش آموز اضافه شد:)');
+        return redirect('/class/show');
+
+    }
+
+
+    function showMultiAddStudentPage(Request $request)
+    {
+        $class_id=$request->class_id;
+        $manager = Manager::find(Auth::user()->userable->userable_id);
+        $students = $manager->student()->get();
+        $num = 1;
+        return view('admin.class.multi-add-student', compact('students', 'num','class_id'));
+
+
+    }
 
 //    public function showAllAttendanceChart($id)
 //    {
