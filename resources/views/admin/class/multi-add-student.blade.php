@@ -61,7 +61,8 @@
                     </tbody>
 
                 </table>
-                <input type="submit" class="btn btn-info" value="اضفافه کردن به کلاس">
+                <input type="submit" class="btn btn-info" value="اضافه کردن به کلاس">
+
             </form>
         </div>
     </div>
