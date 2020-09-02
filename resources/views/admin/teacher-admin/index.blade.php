@@ -107,7 +107,12 @@
 
                 </tbody>
             </table>
+
         </div>
+
+    </div>
+    <div class="align-self-center pagination pg-blue ">
+        {{$teachers->links()}}
     </div>
 
 

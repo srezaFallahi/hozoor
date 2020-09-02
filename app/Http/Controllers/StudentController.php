@@ -75,7 +75,7 @@ class StudentController extends Controller
     public function show($id)
     {
         $manager = Manager::find(Auth::user()->userable->userable_id);
-        $students = $manager->student()->get();
+        $students = $manager->student()->paginate(7);
         $num = 1;
 //        $role = Auth::user()->userable->userable_type;
 //        return '1';

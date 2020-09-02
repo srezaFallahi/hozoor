@@ -74,10 +74,10 @@ class RoomController extends Controller
         if (Auth::user()->userable->userable_type == "App\Teacher") {
             $teach = Teacher::find(Auth::user()->userable->userable_id);
             $manager = Manager::find($teach->manager_id);
-            $classes = $teach->rooms()->get();
+            $classes = $teach->rooms()->paginate(7);
         } else {
             $manager = Manager::find(Auth::user()->userable->userable_id);
-            $classes = $manager->room()->get();
+            $classes = $manager->room()->paginate(4);
         }
         $grades = $manager->grade()->get();
         $teachers = $manager->teacher()->get();
@@ -88,11 +88,7 @@ class RoomController extends Controller
 //        return $tomorrow;
         $classes = $this->checkDay1($classes, $tomorrow);
         $role = Auth::user()->userable->userable_type;
-//        return $tomorrow;
-//        foreach ($classes as $class) {
-//            echo $class->day1;
-//        }
-//        return $classes;
+
         $num = 1;
         return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students', 'role'));
 
@@ -123,7 +119,7 @@ class RoomController extends Controller
         $data = $request->all();
         $class = Room::find($id);
         $class->update($data);
-        Session::flash('massage', 'کلاس ویرایش شد:)');
+        Session::flash('massage', 'کلاس ویرایش شد.');
         return redirect('/class/show');
 
     }
@@ -392,6 +388,33 @@ class RoomController extends Controller
 
     }
 
+    public function searchClass(Request $request){
+        $search=$request->search;
+        $manager = Manager::findManager();
+        $classes=$manager->room->where("name",'=',$search);
+        $teach = null;
+
+        if (Auth::user()->userable->userable_type == "App\Teacher") {
+            $teach = Teacher::find(Auth::user()->userable->userable_id);
+            $manager = Manager::find($teach->manager_id);
+            $classes = $teach->rooms()->paginate(7);
+        } else {
+            $manager = Manager::find(Auth::user()->userable->userable_id);
+            $classes = $manager->room()->paginate(4);
+        }
+        $grades = $manager->grade()->get();
+        $teachers = $manager->teacher()->get();
+        $students = $manager->student()->get();
+        $classes = $this->getPercent($classes);
+        $tomorrow = \verta()->dayOfWeek;
+
+//        return $tomorrow;
+        $classes = $this->checkDay1($classes, $tomorrow);
+        $role = Auth::user()->userable->userable_type;
+
+        $num = 1;
+        return view('admin.class.index', compact('classes', 'grades', 'num', 'teachers', 'students', 'role'));
+    }
 //    public function showAllAttendanceChart($id)
 //    {
 //

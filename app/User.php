@@ -51,6 +51,7 @@ class User extends Authenticatable
             foreach ($role->permissions()->get() as $per) {
                 if ($per->name == $permission) {
                     return true;
+
                 }
             }
         }
@@ -61,4 +62,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role');
     }
+
 }

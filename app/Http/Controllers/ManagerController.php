@@ -24,12 +24,14 @@ class ManagerController extends Controller
     public function __construct()
     {
 
-        $this->middleware('adminPage:manager-controller', ['except' => ['store', 'create']]);
+        $this->middleware('adminPage:Manager-controller', ['except' => ['store', 'create']]);
     }
 
     public function index()
     {
-
+        $managers=Manager::paginate(7);
+        $num = 1;
+        return view('admin.admin.manager-admin',compact('managers','num'));
     }
 
     /**
@@ -70,7 +72,7 @@ class ManagerController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

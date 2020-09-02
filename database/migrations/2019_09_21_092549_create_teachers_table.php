@@ -17,6 +17,7 @@ class CreateTeachersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('manager_id')->unsigned();
             $table->timestamps();
+
         });
     }
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -174,7 +174,7 @@
             @permission('Manager-controller')
 
             <li class="nav-item">
-                <a class="nav-link text-right" href="{{route('show-all-manager')}}">
+                <a class="nav-link text-right" href="{{route('manager.index')}}">
                      <span
                          style="font-family: Sahel;font-weight: bold;"> مدیران </span>
                     <i class="fas fa-chalkboard"></i></a>

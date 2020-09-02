@@ -26,8 +26,10 @@
                     <th style="font-family: Sahel;font-weight: bolder">اضافه کردن دانش آموز</th>
                     <th style="font-family: Sahel;font-weight: bolder">اعضا کلاس</th>
                     <th style="font-family: Sahel;font-weight: bolder">حضور و غیاب</th>
+                    @permission('teacher-controller')
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
+                    @endpermission
                     <th style="font-family: Sahel;font-weight: bolder">نمودار</th>
                     <th style="font-family: Sahel;font-weight: bolder">درصد حضور</th>
                 </tr>
@@ -90,6 +92,8 @@
 
                             </form>
                         </td>
+                        @permission('teacher-controller')
+
                         <td style="font-family: Sahel;font-weight: normal">
 
                             <div class="text-center">
@@ -109,6 +113,7 @@
                                     <span>حذف</span></button>
                             </form>
                         </td>
+                        @endpermission
                         <td class="col-2">
                             <form action="{{route('dayChart',$class->id)}}" method="get">
                                 @csrf
@@ -126,6 +131,10 @@
         </div>
 
     </div>
+    <div class="align-self-center pagination pg-blue ">
+        {{$classes->links()}}
+    </div>
+
     @permission('teacher-controller')
     <div class="text-center wow fadeInRight">
         <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"

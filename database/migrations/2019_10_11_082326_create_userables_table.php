@@ -15,10 +15,11 @@ class CreateUserablesTable extends Migration
     {
         Schema::create('userables', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
-            $table->integer('userable_id');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('userable_id')->unsigned();
             $table->string('userable_type');
             $table->timestamps();
+
         });
     }
 

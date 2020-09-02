@@ -24,8 +24,8 @@ class ManagerRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|max:20|alpha',
-            'last_name' => 'required|max:20|alpha',
+            'first_name' => 'required|max:20|alpha_spaces',
+            'last_name' => 'required|max:20|alpha_spaces',
             'password' => 'required|min:6|confirmed',
             'email' => 'required|unique:users,email',
             'username' => 'required|unique:users,username',
@@ -41,9 +41,9 @@ class ManagerRequest extends FormRequest
 
         return [
             'first_name.required' => 'نام خود را وارد کنید',
-            'first_name.alpha' => 'فقط از حروف الفبا استفاده کنید ',
+            'first_name.alpha_spaces' => 'فقط از حروف الفبا استفاده کنید ',
             'last_name.required' => 'نام خانوادگی خود را وارد کنید',
-            'last_name.alpha' => 'فقط از حروف الفبا استفاده کنید',
+            'last_name.alpha_spaces' => 'فقط از حروف الفبا استفاده کنید',
             'password.required' => 'رمز عبور  خود را وارد کنید',
             'password.confirmed' => 'رمز عبور با تکرار رمز عبور مطابقت ندارد ',
             'password.min' => 'رمز عبور باید بیشتر از ۶ کارکتر باشد. ',

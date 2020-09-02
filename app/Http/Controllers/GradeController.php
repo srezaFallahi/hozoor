@@ -55,7 +55,7 @@ class GradeController extends Controller
      */
     public function show($id)
     {
-        $grades = Grade::all()->where('manager_id', '=', Auth::user()->userable->userable_id);
+        $grades = Manager::find(Auth::user()->userable->userable_id)->grade()->paginate(5);
         $num = 1;
         $role = Auth::user()->userable->userable_type;
 

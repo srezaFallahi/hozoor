@@ -83,10 +83,10 @@ class AdminController extends Controller
     }
 
 
-    public function showAllManager()
-    {
-        $managers = Manager::all()->get();
-        $num = 0;
-        return view('admin.manager-admin.show-all', compact('managers', 'num'));
-    }
+//    public function showAllManager()
+//    {
+//        $managers = Manager::all()->get();
+//        $num = 0;
+//        return view('admin.manager-admin.show-all', compact('managers', 'num'));
+//    }
 }

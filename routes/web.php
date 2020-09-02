@@ -11,8 +11,10 @@
 |
 */
 
-use App\Permission;
+use App\Admin;
+use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Role;
 
@@ -55,11 +57,21 @@ Route::post('/class/multiDelete', 'RoomController@multiRemoveFromClass')->name('
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/manager/show-all', 'AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
+//Route::get('/manager/show-all', 'AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
+//Route::resource('/manager', 'ManagerController')->middleware('adminPage:Manager-controller');
 
 Route::get('/test',function (){
+    $user[]='';
+    $user['first_name']='reza';
+    $user['last_name']='fallahi';
+    $user['code']='1743098170';
+    $user['phone_number']='09163004021';
+    $user['username']='s.reza_78';
+    $user['email']='sreza13781378@gmail.com';
+    $user['password']=Hash::make(40214021);
+    $user = User::create($user);
+    $role = Role::find(1);
+    $user->roles()->save($role);
+    Admin::create()->users()->save($user);
 
-//    $room_id=find(['5','18','13']);
-
-
-} );
+});
