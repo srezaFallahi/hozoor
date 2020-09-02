@@ -58,7 +58,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('login')}}"
-                       style="font-family: Sahel;font-weight: bold" target="_blank">ورود/ثبت نام</a>
+                       style="font-family: Sahel;font-weight: bold" >ورود/ثبت نام</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" target="_blank"
