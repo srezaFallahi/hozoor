@@ -29,7 +29,6 @@
                         <th style="font-family: Sahel;font-weight: bolder">تاریخ ورود</th>
                         <th style="font-family: Sahel;font-weight: bolder">مقطع</th>
                         <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
-                        <th style="font-family: Sahel;font-weight: bolder">حذف</th>
                     </tr>
                     </thead>
                     <tbody>
