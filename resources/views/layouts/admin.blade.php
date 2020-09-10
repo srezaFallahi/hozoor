@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -78,12 +78,12 @@
                 <div class="sidebar-brand-icon rotate-n-15 ">
                     <i class="fas fa-laugh-wink animated bounce infinite"></i>
                 </div>
-{{--                @permission('manager-controller')--}}
-                <div class="sidebar-brand-text mx-3">Be Happy </div>
-{{--                @endpermission--}}
-{{--                @permission('student-controller')--}}
-{{--                <div class="sidebar-brand-text mx-3">پنل مدیریت</div>--}}
-{{--                @endpermission--}}
+                {{--                @permission('manager-controller')--}}
+                <div class="sidebar-brand-text mx-3">Be Happy</div>
+                {{--                @endpermission--}}
+                {{--                @permission('student-controller')--}}
+                {{--                <div class="sidebar-brand-text mx-3">پنل مدیریت</div>--}}
+                {{--                @endpermission--}}
             </a>
 
             <!-- Divider -->
@@ -310,6 +310,25 @@
 <script src="http://code.highcharts.com/highcharts.js"></script>
 {{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--}}
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+{{--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.21/sorting/persian.js">--}}
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.21/sorting/persian.js"></script>
+<script>
+    $('#example').dataTable( {
+        "bInfo" : false,
+        "paging": false,
+        "oLanguage": {
+            "sSearch": "جستجو : "
+        },
+        "language": {
+            "zeroRecords": "عبارت جستجو شده پیدا نشد ."
+        },
+        columnDefs: [
+            { type: 'pstring', targets: 0 }
+        ]
+    } );
+</script>
 <!-- Charts -->
 </body>
 </html>

@@ -11,7 +11,9 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Excel;
 
 class TeacherController extends Controller
 {
@@ -67,8 +69,7 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
-        $teachers = Manager::find(Auth::user()->userable->userable_id)->teacher()->paginate(7);
-        ;
+        $teachers = Manager::find(Auth::user()->userable->userable_id)->teacher()->paginate(7);;
         $num = 1;
         $role = Auth::user()->userable->userable_type;
         return view('admin.teacher-admin.index', compact('teachers', 'num', 'id', 'role'));
@@ -128,5 +129,27 @@ class TeacherController extends Controller
         return redirect()->back();
 
     }
+
+//    public function import(Request $request)
+//    {
+//        $input = Input::file('import');
+////        return ;
+//        $filename = $input->getClientOriginalName();
+//        move_uploaded_file($input->getPathName(), '/home/sreza/Desktop/'.$filename);
+//
+//
+////        return $filename;
+////        $path=$request->
+//        $users = (new \Maatwebsite\Excel\Excel)->import(UsersImport, '/home/sreza/Desktop/'.$filename);
+//        $role = Role::find(3);
+//        $manager = Manager::find(Auth::user()->userable->userable_id);
+////
+//        foreach ($users as $user) {
+//           $user= User::create($user);
+//            $user->roles()->save($role);
+//            $manager->teacher()->create()->users()->save($user);
+//        }
+//        return redirect('/')->with('success', 'All good!');
+//    }
 
 }

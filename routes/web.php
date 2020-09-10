@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 
 Route::resource('/teacher', 'TeacherController')->middleware('adminPage:teacher-controller');
+Route::post('/teacher/import', 'TeacherController@import')->name('import')->middleware('adminPage:teacher-controller');
 Route::resource('/grade', 'GradeController')->middleware('adminPage:grade-controller');
 Route::resource('/manager', 'ManagerController');
 Route::get('/class/chart/{grade_id}', 'RoomController@gradeChart')->name('gradeChart')->middleware('adminPage:room-controller');
@@ -60,18 +61,18 @@ Auth::routes();
 //Route::get('/manager/show-all', 'AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
 //Route::resource('/manager', 'ManagerController')->middleware('adminPage:Manager-controller');
 
-Route::get('/test',function (){
-    $user[]='';
-    $user['first_name']='reza';
-    $user['last_name']='fallahi';
-    $user['code']='1743098170';
-    $user['phone_number']='09163004021';
-    $user['username']='s.reza_78';
-    $user['email']='sreza13781378@gmail.com';
-    $user['password']=Hash::make(40214021);
-    $user = User::create($user);
-    $role = Role::find(1);
-    $user->roles()->save($role);
-    Admin::create()->users()->save($user);
-
-});
+//Route::get('/test',function (){
+//    $user[]='';
+//    $user['first_name']='reza';
+//    $user['last_name']='fallahi';
+//    $user['code']='1743098170';
+//    $user['phone_number']='09163004021';
+//    $user['username']='s.reza_78';
+//    $user['email']='sreza13781378@gmail.com';
+//    $user['password']=Hash::make(40214021);
+//    $user = User::create($user);
+//    $role = Role::find(1);
+//    $user->roles()->save($role);
+//    Admin::create()->users()->save($user);
+//
+//});

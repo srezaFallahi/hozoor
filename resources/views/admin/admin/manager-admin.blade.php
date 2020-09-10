@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('content')
@@ -14,16 +13,14 @@
     </div>
     <div class="card-body" dir="rtl">
         <div class="container table-responsive" dir="rtl">
-            <table class="table  text-center">
+            <table id="example" class="table  table-bordered  table-responsive text-center">
                 <thead>
                 <tr>
                     <th style="font-family: Sahel;font-weight: bolder">ردیف</th>
                     <th style="font-family: Sahel;font-weight: bolder">نام</th>
                     <th style="font-family: Sahel;font-weight: bolder">نام خانوادگی</th>
-                    <th style="font-family: Sahel;font-weight: bolder">وضعیت</th>
                     <th style="font-family: Sahel;font-weight: bolder">یوزرنیم</th>
                     <th style="font-family: Sahel;font-weight: bolder">ایمیل</th>
-                    {{--                    <th style="font-family: Sahel;font-weight: bolder">پسوورد</th>--}}
                     <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
                     <th style="font-family: Sahel;font-weight: bolder">حذف</th>
                 </tr>
@@ -38,15 +35,6 @@
                             <td style="font-family: Sahel;font-weight: normal">{{$manager->last_name}}</td>
                             <td style="font-family: Sahel;font-weight: normal">{{$manager->username}}</td>
                             <td style="font-family: Sahel;font-weight: normal">{{$manager->email}}</td>
-                            <td style="font-family: Sahel;font-weight: normal;">
-                                <form action="{{route('teacher-class')}}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="teacher_id" value="{{$managerTemp->id}}">
-                                    <input type="submit" class="btn btn-primary text-white" value="کلاس ها"
-                                           style="font-family: Sahel;font-weight: bold;">
-
-                                </form>
-                            </td>
                             <td style=" font-family: Sahel;font-weight:bold;">
                                 <a href="{{route('manager.edit',$managerTemp->id)}}" class="btn btn-1 btn-1b ">
                                     ویرایش<i class="fas fa-user-edit"></i></a>

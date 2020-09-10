@@ -11,6 +11,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 
 class ManagerController extends Controller
@@ -83,7 +84,9 @@ class ManagerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $managerTemp = Manager::find($id);
+
+        return view('admin.manager-admin.edit', compact('managerTemp'));
     }
 
     /**
@@ -95,7 +98,15 @@ class ManagerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $manager = Manager::find($id);
+        $id = $manager->id;
+        $data['password'] = Hash::make($request['password']);
+        foreach ($manager->users as $user) {
+            $user->update($data);
+        }
+        Session::flash('massage', 'مدیر ویرایش شد.');
+        return redirect('/manager');
     }
 
     /**

@@ -7,34 +7,41 @@
         <div class="card-title text-right text-white">
             <span style="font-family: Sahel;font-size: 20px; font-weight: normal"> کلاس  <i
                     class="fas fa-user-plus"></i> </span>
-
             <div class="clearfix d-md-none"></div>
 
         </div>
+
     </div>
     <div class="card-body row" dir="rtl">
 
         <div class="container  col-9" dir="rtl">
-            <table class="table table-responsive text-center">
+
+{{--            <div id="example_filter" class="dataTables_filter">--}}
+{{--                <label>--}}
+{{--                    Search:--}}
+{{--                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example"></label>--}}
+{{--            </div>--}}
+
+            <table id="example" class="table  table-bordered text-center  table-responsive " >
                 <thead>
                 <tr>
-                    <th style="font-family: Sahel;font-weight: bolder">ردیف</th>
-                    <th style="font-family: Sahel;font-weight: bolder">نام کلاس</th>
-                    <th style="font-family: Sahel;font-weight: bolder">نام استاد</th>
-                    <th style="font-family: Sahel;font-weight: bolder">مقطع</th>
-                    <th style="font-family: Sahel;font-weight: bolder">روز ها</th>
-                    <th style="font-family: Sahel;font-weight: bolder">اضافه کردن دانش آموز</th>
-                    <th style="font-family: Sahel;font-weight: bolder">اعضا کلاس</th>
-                    <th style="font-family: Sahel;font-weight: bolder">حضور و غیاب</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">ردیف</th>
+                    <th class="th-lg" style="font-family: Sahel;font-weight: bolder">نام کلاس</th>
+                    <th class="th-lg" style="font-family: Sahel;font-weight: bolder">نام استاد</th>
+                    <th class="th-lg" style="font-family: Sahel;font-weight: bolder">مقطع</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">روز ها</th>
+                    <th class="th-lg" style="font-family: Sahel;font-weight: bolder">اضافه کردن دانش آموز</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">اعضا کلاس</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">حضور و غیاب</th>
                     @permission('teacher-controller')
-                    <th style="font-family: Sahel;font-weight: bolder">ویرایش</th>
-                    <th style="font-family: Sahel;font-weight: bolder">حذف</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">ویرایش</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">حذف</th>
                     @endpermission
-                    <th style="font-family: Sahel;font-weight: bolder">نمودار</th>
-                    <th style="font-family: Sahel;font-weight: bolder">درصد حضور</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">نمودار</th>
+                    <th class="th-sm" style="font-family: Sahel;font-weight: bolder">درصد حضور</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                 @foreach($classes as $class)
 
                     <tr>

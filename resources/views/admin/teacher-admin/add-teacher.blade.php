@@ -144,6 +144,7 @@
                     </div>
                 </div>
 
+
                 <!-- Grid column -->
             </div>
             <!-- Grid row -->
@@ -154,6 +155,11 @@
                    style="font-family: Sahel;font-weight: bolder; color: white"
                    value="ثبت">
         </form>
+{{--        <form action="{{route('import')}}" method="post" enctype="multipart/form-data">--}}
+{{--            @csrf--}}
+{{--            <input type="file" value="import" name="import">--}}
+{{--            <input type="submit" value="set">--}}
+{{--        </form>--}}
 
     </div>
     <!-- Extended material form grid -->
