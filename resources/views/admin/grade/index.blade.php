@@ -66,9 +66,6 @@
         </div>
 
     </div>
-    <div class="align-self-center pagination pg-blue ">
-        {{$grades->links()}}
-    </div>
 
     <div class="text-center wow fadeInRight">
         <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal"

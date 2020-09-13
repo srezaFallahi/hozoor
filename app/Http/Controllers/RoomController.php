@@ -74,10 +74,10 @@ class RoomController extends Controller
         if (Auth::user()->userable->userable_type == "App\Teacher") {
             $teach = Teacher::find(Auth::user()->userable->userable_id);
             $manager = Manager::find($teach->manager_id);
-            $classes = $teach->rooms()->paginate(7);
+            $classes = $teach->rooms()->get();
         } else {
             $manager = Manager::find(Auth::user()->userable->userable_id);
-            $classes = $manager->room()->paginate(4);
+            $classes = $manager->room()->get();
         }
         $grades = $manager->grade()->get();
         $teachers = $manager->teacher()->get();

@@ -14,7 +14,7 @@
     <div class="card-body" dir="rtl">
 
         <div class="container table-responsive" dir="rtl">
-            <table id="example"  class="table  text-center">
+            <table id="example" class="table  text-center">
                 <thead>
                 <tr>
                     <th style="font-family: Sahel;font-weight: bolder">ردیف</th>
@@ -111,9 +111,7 @@
         </div>
 
     </div>
-    <div class="align-self-center pagination pg-blue ">
-        {{$teachers->links()}}
-    </div>
+
 
 
 @endsection

@@ -79,8 +79,6 @@
 
         </div>
     </div>
-    <div class="align-self-center pagination pg-blue ">
-        {{$students->links()}}
-    </div>
+
 
 @endsection

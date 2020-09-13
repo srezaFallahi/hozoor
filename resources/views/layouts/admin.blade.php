@@ -313,20 +313,32 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 {{--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.21/sorting/persian.js">--}}
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.21/sorting/persian.js"></script>
+{{--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.21/sorting/persian.js"></script>--}}
 <script>
     $('#example').dataTable( {
+
+        "pageLength": 4,
         "bInfo" : false,
-        "paging": false,
+        "paging": true,
         "oLanguage": {
             "sSearch": "جستجو : "
         },
         "language": {
-            "zeroRecords": "عبارت جستجو شده پیدا نشد ."
-        },
-        columnDefs: [
-            { type: 'pstring', targets: 0 }
-        ]
+                "zeroRecords": "عبارت جستجو شده پیدا نشد .",
+
+            "paginate": {
+                "previous": "قبلی",
+                "next": "بعدی"
+            }
+        }
+        // "language": {
+        //
+        //
+        //         "previous": "قبلی",
+        //         "next": "بعدی"
+        //     },
+            // "processing": true,
+        // "serverSide": true,
     } );
 </script>
 <!-- Charts -->

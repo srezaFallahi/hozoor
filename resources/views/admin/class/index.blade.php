@@ -138,9 +138,7 @@
         </div>
 
     </div>
-    <div class="align-self-center pagination pg-blue ">
-        {{$classes->links()}}
-    </div>
+
 
     @permission('teacher-controller')
     <div class="text-center wow fadeInRight">
