@@ -315,17 +315,17 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
 {{--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/1.10.21/sorting/persian.js"></script>--}}
 <script>
-    $('#example').dataTable( {
+    $('#example').dataTable({
 
         "pageLength": 4,
-        "bInfo" : false,
+        "bInfo": false,
         "paging": true,
         "oLanguage": {
             "sSearch": "جستجو : "
         },
         "language": {
-                "zeroRecords": "عبارت جستجو شده پیدا نشد .",
-
+            "zeroRecords": "عبارت جستجو شده پیدا نشد .",
+            "sLengthMenu": "نشان دادن _MENU_ ردیف",
             "paginate": {
                 "previous": "قبلی",
                 "next": "بعدی"
@@ -337,9 +337,9 @@
         //         "previous": "قبلی",
         //         "next": "بعدی"
         //     },
-            // "processing": true,
+        // "processing": true,
         // "serverSide": true,
-    } );
+    });
 </script>
 <!-- Charts -->
 </body>
