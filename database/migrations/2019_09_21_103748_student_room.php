@@ -16,8 +16,13 @@ class StudentRoom extends Migration
         Schema::create('room_student', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('room_id')->unsigned();
-            $table->integer('student_id');
+            $table->unsignedBigInteger('student_id');
             $table->timestamps();
+
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+
+
         });
     }
 

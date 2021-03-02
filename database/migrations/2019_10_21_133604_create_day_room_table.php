@@ -15,9 +15,14 @@ class CreateDayRoomTable extends Migration
     {
         Schema::create('day_room', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('day_id')->unsigned();
-            $table->integer('room_id')->unsigned();
+            $table->unsignedBigInteger('day_id')->unsigned();
+            $table->unsignedBigInteger('room_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('day_id')->references('id')->on('days')->onDelete('cascade');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+
+
         });
     }
 
