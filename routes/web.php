@@ -56,6 +56,8 @@ Route::post('/class/teacher-class', 'RoomController@teacherClass')->name('teache
 Route::get('/class/dayIndex/{id}', 'RoomController@viewDayChartIndex')->name('dayIndex')->middleware('adminPage:room-controller');
 Route::post('/class/multiDelete', 'RoomController@multiRemoveFromClass')->name('multiDelete')->middleware('adminPage:room-controller');
 Auth::routes();
+
+
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/manager/show-all', 'AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
