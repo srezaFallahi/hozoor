@@ -87,7 +87,7 @@
         <!-- Content -->
         <div class="text-center white-text mx-65 ">
             <h1 class="mb-4 wow fadeInUpBig">
-                <strong style="font-family: Sahel;font-weight: bold">دوره تابستانه مسجد امام موسی بن جعفر </strong>
+                <strong style="font-family: Sahel;font-weight: bold">دوره تابستانه مسجد امام موسی بن جعفر (ع) </strong>
             </h1>
 
             <p class="mb-4 wow fadeInDownBig">
