@@ -164,12 +164,12 @@
             @endpermission
             @permission('student-controller')
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link text-right" href="{{route('class.show',Auth::user()->userable->userable_id)}}">
                      <span
                          style="font-family: Sahel;font-weight: bold;">کلاس</span>
                     <i class="fas fa-chalkboard"></i></a>
-            </li>
+            </li> --}}
             @endpermission
             @permission('Manager-controller')
 

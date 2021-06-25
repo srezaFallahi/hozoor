@@ -20,6 +20,11 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+
+        $this->middleware('adminPage:student-controller', ['except' => ['store', 'create']]);
+    }
     public function index()
     {
         //
@@ -54,7 +59,7 @@ class StudentController extends Controller
         $student['dad_name'] = $request->dad_name;
         $student['birth_day'] = $request->birth_day;
         $student['entry_date'] = $request->entry_date;
-        $manager = Manager::find(Auth::user()->userable->userable_id);
+        $manager = Manager::find(5);
         $user['password'] = Hash::make($request['password']);
 
         $user = User::create($user);

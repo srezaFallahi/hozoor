@@ -37,7 +37,7 @@ Route::get('/er', function () {
 //})->name('teacherAdmin');
 
 
-Route::resource('/student', 'StudentController')->middleware('adminPage:student-controller');
+Route::resource('/student', 'StudentController');
 Route::resource('/attendance', 'AttendanceController')->middleware('adminPage:attendance-controller');
 Route::resource('/class', 'RoomController')->middleware('adminPage:room-controller');
 Route::post('/class/multiAddStudentShow', 'RoomController@showMultiAddStudentPage')->name('multiStudentAddShow')->middleware('adminPage:room-controller');

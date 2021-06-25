@@ -8,10 +8,12 @@ use App\Manager;
 use App\Role;
 use App\Teacher;
 use App\User;
+use App\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+
 
 
 class ManagerController extends Controller
@@ -42,7 +44,11 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        return view('admin.manager-admin.add');
+// return 1 ;
+
+        $grades = Grade::all()->where('manager_id','=',5);
+        // dd($grades);
+        return view('admin.manager-admin.add',compact('grades'));
     }
 
     /**
