@@ -47,6 +47,11 @@ class Manager extends Model
         return $this->hasMany('App\Attendance');
     }
 
+
+    public function media(){
+        return $this->hasMany('App\Media');
+    }
+
     public static function findManager(){
         if (Auth::user()->userable->userable_type == 'App\Manager') {
             $manger = Manager::find(Auth::user()->userable->userable_id);

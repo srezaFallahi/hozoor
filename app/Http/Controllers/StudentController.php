@@ -60,6 +60,7 @@ class StudentController extends Controller
         $student['birth_day'] = $request->birth_day;
         $student['entry_date'] = $request->entry_date;
         $manager = Manager::find(5);
+        //(Auth::user()->userable->userable_id
         $user['password'] = Hash::make($request['password']);
 
         $user = User::create($user);

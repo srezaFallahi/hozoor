@@ -26,4 +26,10 @@ class Grade extends Model
     {
         return $this->hasOne('App\Room');
     }
+
+    public function media(){
+
+
+        return $this->hasMany('App\Media');
+    }
 }

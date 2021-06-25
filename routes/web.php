@@ -58,6 +58,9 @@ Route::post('/class/multiDelete', 'RoomController@multiRemoveFromClass')->name('
 Auth::routes();
 
 
+Route::resource('media', 'MediaController');
+
+
 //Route::get('/home', 'HomeController@index')->name('home');
 
 //Route::get('/manager/show-all', 'AdminController@showAllManager')->middleware('admin-Page:Manager-controller')->name('show-all-manager');
