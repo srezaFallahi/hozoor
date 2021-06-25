@@ -104,7 +104,7 @@
 <!-- Full Page Intro -->
 
 <!--Main layout-->
-<main>
+{{-- <main>
     <div class="container">
 
         <!--Section: Main info-->
@@ -476,7 +476,7 @@
     </div>
     <!--/.Copyright-->
 
-</footer>
+</footer> --}}
 <!--/.Footer-->
 
 <!-- SCRIPTS -->
