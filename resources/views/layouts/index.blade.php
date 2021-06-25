@@ -87,12 +87,12 @@
         <!-- Content -->
         <div class="text-center white-text mx-65 ">
             <h1 class="mb-4 wow fadeInUpBig">
-                <strong style="font-family: Sahel;font-weight: bold">حضور غیاب آنلاین </strong>
+                <strong style="font-family: Sahel;font-weight: bold">دوره تابستانه مسجد امام موسی بن جعفر </strong>
             </h1>
 
             <p class="mb-4 wow fadeInDownBig">
-                <strong style="font-family: Sahel;font-weight:bolder;font-size: 100%">این سایت فقط جهت تست و دیدن رزومه می باشد
-                .این سایت روی شبکه داخلی چند مسجد و حوزه علمیه و همچنین یک مهدکودک استفاده می شود</strong>
+                {{-- <strong style="font-family: Sahel;font-weight:bolder;font-size: 100%">این سایت فقط جهت تست و دیدن رزومه می باشد
+                .این سایت روی شبکه داخلی چند مسجد و حوزه علمیه و همچنین یک مهدکودک استفاده می شود</strong> --}}
             </p>
         </div>
         <!-- Content -->
